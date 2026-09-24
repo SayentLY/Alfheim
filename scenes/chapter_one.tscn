@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://db33shn125ax6"]
+
+[ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
+
+[node name="ChapterOne" type="Control" unique_id=1810136474]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8jvkd")
+
+[node name="ChapterTitle" type="Label" parent="." unique_id=273794041]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Глава I"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=599911621]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1254543798]
+layout_mode = 2
+
+[node name="EventText" type="Label" parent="MarginContainer/VBoxContainer" unique_id=885201968]
+layout_mode = 2
+text = "Ты просыпаешься у дороги. Вдалеке виднеется деревня."
+
+[node name="ChoiceButton1" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1120121839]
+layout_mode = 2
+text = "Пойти в деревню"
+
+[node name="ChoiceButton2" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1773415175]
+layout_mode = 2
+text = "Остаться у дороги"
