@@ -1,175 +1,202 @@
 {
-  "start_event": "meadow_start",
-
+  "start_event": "prologue_home",
   "events": {
-	"meadow_start": {
-	  "text": "Ты выходишь из леса на просторный луг. После долгого пути ты наконец останавливаешься и пытаешься понять, куда идти дальше.",
-	  "choices": [
-		{
-		  "text": "Пойти по тропе",
-		  "next": "crossroads"
-		},
-		{
-		  "text": "Пойти наугад",
-		  "next": "crossroads"
-		}
-	  ]
-	},
-
-	"crossroads": {
-	  "text": "Через некоторое время ты оказываешься на развилке. Одна дорога ведёт в сторону деревни, другая уходит глубже в лес.",
-	  "choices": [
-		{
-		  "text": "Пойти к деревне",
-		  "next": "boy_encounter"
-		},
-		{
-		  "text": "Пойти в лес",
-		  "next": "thief_encounter"
-		}
-	  ]
-	},
-
-	"boy_encounter": {
-	  "text": "У дороги ты замечаешь мальчишку, который пытается справиться с застрявшей телегой.",
-	  "choices": [
-		{
-		  "text": "Помочь мальчишке",
-		  "effects": {
-			"good": 1,
-			"flags": {
-			  "helped_boy": true
-			},
-			"npc_relation": {
-			  "boy": "positive"
-			}
-		  },
-		  "next": "boy_training"
-		},
-		{
-		  "text": "Пройти мимо",
-		  "effects": {
-			"flags": {
-			  "ignored_boy": true
-			},
-			"npc_relation": {
-			  "boy": "negative"
-			}
-		  },
-		  "next": "boy_training"
-		}
-	  ]
-	},
-
-	"boy_training": {
-	  "text": "Позже ты снова встречаешь мальчишку. Он возится со старым замком.",
-	  "choices": [
-		{
-		  "text": "Попросить научить тебя",
-		  "conditions": {
-			"npc_relation": {
-			  "boy": "positive"
-			},
-			"flags": {
-			  "helped_boy": true
-			}
-		  },
-		  "effects": {
-			"add_skill": "lockpicking"
-		  },
-		  "next": "locked_chest"
-		},
-		{
-		  "text": "Продолжить путь",
-		  "next": "locked_chest"
-		}
-	  ]
-	},
-
-	"thief_encounter": {
-	  "text": "Между деревьями ты замечаешь незнакомца. Убедившись, что рядом никого нет, он быстро прячет что-то под одеждой.",
-	  "choices": [
-		{
-		  "text": "Сделать вид, что ничего не заметил",
-		  "effects": {
-			"flags": {
-			  "met_thief": true
-			},
-			"npc_relation": {
-			  "thief": "positive"
-			}
-		  },
-		  "next": "thief_followup"
-		},
-		{
-		  "text": "Спросить, что он прячет",
-		  "effects": {
-			"flags": {
-			  "met_thief": true
-			},
-			"npc_relation": {
-			  "thief": "negative"
-			}
-		  },
-		  "next": "thief_followup"
-		}
-	  ]
-	},
-
-	"thief_followup": {
-	  "text": "Незнакомец внимательно смотрит на тебя, прежде чем уйти.",
-	  "choices": [
-		{
-		  "text": "Принять предложение вора",
-		  "conditions": {
-			"npc_relation": {
-			  "thief": "positive"
-			}
-		  },
-		  "next": "village_arrival"
-		},
-		{
-		  "text": "Продолжить путь",
-		  "next": "village_arrival"
-		}
-	  ]
-	},
-
-	"locked_chest": {
-	  "text": "У дороги стоит старый запертый сундук.",
-	  "choices": [
-		{
-		  "text": "[Взлом замков] Попытаться открыть сундук",
-		  "conditions": {
-			"skill": "lockpicking"
-		  },
-		  "effects": {
-			"flags": {
-			  "opened_test_chest": true
-			}
-		  },
-		  "next": "village_arrival"
-		},
-		{
-		  "text": "Оставить сундук",
-		  "next": "village_arrival"
-		}
-	  ]
-	},
-
-	"village_arrival": {
-	  "text": "К вечеру дорога приводит тебя к небольшой деревне.",
-	  "choices": [
-		{
-		  "text": "Войти в деревню",
-		  "next": "end_test"
-		}
-	  ]
-	},
-
-	"end_test": {
-	  "text": "Конец тестового участка.",
-	  "choices": []
-	}
+    "prologue_home": {
+      "text": "Сколько ты себя помнишь, твоим домом была небольшая деревня в далёком королевстве.\n\nМестный кузнец приютил тебя, когда тебе было всего пять лет. Семьи у тебя не было, и с тех пор он стал самым близким тебе человеком.",
+      "choices": [
+        {
+          "text": "Дальше",
+          "next": "prologue_forge"
+        }
+      ]
+    },
+    "prologue_forge": {
+      "text": "Годы шли. Ты вырос при кузнице и со временем стал подмастерьем своего наставника.\n\nТвоя жизнь была простой: жар горна, звон молота и тихая деревня, которую ты считал своим домом.",
+      "choices": [
+        {
+          "text": "Дальше",
+          "next": "prologue_raid"
+        }
+      ]
+    },
+    "prologue_raid": {
+      "text": "Всё изменилось за одну ночь.\n\nНа деревню напали разбойники. Они грабили дома, убивали тех, кто сопротивлялся, и оставляли за собой лишь огонь.\n\nТебе оставалось только бежать.",
+      "choices": [
+        {
+          "text": "Дальше",
+          "next": "prologue_meadow"
+        }
+      ]
+    },
+    "prologue_meadow": {
+      "text": "Ты бежал через лес, пока крики и пламя не остались далеко позади.\n\nНа рассвете впереди показался луг. Там ты остановился и дал себе обещание:\n\nОднажды ты найдёшь тех, кто уничтожил твой дом.",
+      "choices": [
+        {
+          "text": "Выйти на луг",
+          "next": "meadow_start"
+        }
+      ]
+    },
+    "meadow_start": {
+      "text": "Ты выходишь из леса на просторный луг. После долгого пути ты наконец останавливаешься и пытаешься понять, куда идти дальше.",
+      "choices": [
+        {
+          "text": "Пойти по тропе",
+          "next": "crossroads"
+        },
+        {
+          "text": "Пойти наугад",
+          "next": "crossroads"
+        }
+      ]
+    },
+    "crossroads": {
+      "text": "Через некоторое время ты оказываешься на развилке. Одна дорога ведёт в сторону деревни, другая уходит глубже в лес.",
+      "choices": [
+        {
+          "text": "Пойти к деревне",
+          "next": "boy_encounter"
+        },
+        {
+          "text": "Пойти в лес",
+          "next": "thief_encounter"
+        }
+      ]
+    },
+    "boy_encounter": {
+      "text": "У дороги ты замечаешь мальчишку, который пытается справиться с застрявшей телегой.",
+      "choices": [
+        {
+          "text": "Помочь мальчишке",
+          "effects": {
+            "good": 1,
+            "flags": {
+              "helped_boy": true
+            },
+            "npc_relation": {
+              "boy": "positive"
+            }
+          },
+          "next": "boy_training"
+        },
+        {
+          "text": "Пройти мимо",
+          "effects": {
+            "flags": {
+              "ignored_boy": true
+            },
+            "npc_relation": {
+              "boy": "negative"
+            }
+          },
+          "next": "boy_training"
+        }
+      ]
+    },
+    "boy_training": {
+      "text": "Позже ты снова встречаешь мальчишку. Он возится со старым замком.",
+      "choices": [
+        {
+          "text": "Попросить научить тебя",
+          "conditions": {
+            "npc_relation": {
+              "boy": "positive"
+            },
+            "flags": {
+              "helped_boy": true
+            }
+          },
+          "effects": {
+            "add_skill": "lockpicking"
+          },
+          "next": "locked_chest"
+        },
+        {
+          "text": "Продолжить путь",
+          "next": "locked_chest"
+        }
+      ]
+    },
+    "thief_encounter": {
+      "text": "Между деревьями ты замечаешь незнакомца. Убедившись, что рядом никого нет, он быстро прячет что-то под одеждой.",
+      "choices": [
+        {
+          "text": "Сделать вид, что ничего не заметил",
+          "effects": {
+            "flags": {
+              "met_thief": true
+            },
+            "npc_relation": {
+              "thief": "positive"
+            }
+          },
+          "next": "thief_followup"
+        },
+        {
+          "text": "Спросить, что он прячет",
+          "effects": {
+            "flags": {
+              "met_thief": true
+            },
+            "npc_relation": {
+              "thief": "negative"
+            }
+          },
+          "next": "thief_followup"
+        }
+      ]
+    },
+    "thief_followup": {
+      "text": "Незнакомец внимательно смотрит на тебя, прежде чем уйти.",
+      "choices": [
+        {
+          "text": "Принять предложение вора",
+          "conditions": {
+            "npc_relation": {
+              "thief": "positive"
+            }
+          },
+          "next": "village_arrival"
+        },
+        {
+          "text": "Продолжить путь",
+          "next": "village_arrival"
+        }
+      ]
+    },
+    "locked_chest": {
+      "text": "У дороги стоит старый запертый сундук.",
+      "choices": [
+        {
+          "text": "[Взлом замков] Попытаться открыть сундук",
+          "conditions": {
+            "skill": "lockpicking"
+          },
+          "effects": {
+            "flags": {
+              "opened_test_chest": true
+            }
+          },
+          "next": "village_arrival"
+        },
+        {
+          "text": "Оставить сундук",
+          "next": "village_arrival"
+        }
+      ]
+    },
+    "village_arrival": {
+      "text": "К вечеру дорога приводит тебя к небольшой деревне.",
+      "choices": [
+        {
+          "text": "Войти в деревню",
+          "next": "end_test"
+        }
+      ]
+    },
+    "end_test": {
+      "text": "Конец тестового участка.",
+      "choices": []
+    }
   }
 }
