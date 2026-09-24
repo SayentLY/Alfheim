@@ -12,30 +12,55 @@ grow_vertical = 2
 script = ExtResource("1_8jvkd")
 
 [node name="ChapterTitle" type="Label" parent="." unique_id=273794041]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 55.0
+offset_bottom = 105.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
 text = "Глава I"
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=599911621]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -120.0
+offset_right = 450.0
+offset_bottom = 520.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1254543798]
 layout_mode = 2
+theme_override_constants/separation = 28
 
 [node name="EventText" type="Label" parent="MarginContainer/VBoxContainer" unique_id=885201968]
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Ты просыпаешься у дороги. Вдалеке виднеется деревня."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="ChoiceButton1" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1120121839]
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Пойти в деревню"
 
 [node name="ChoiceButton2" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1773415175]
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Остаться у дороги"
