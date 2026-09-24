@@ -228,16 +228,6 @@ func apply_effects(effects: Dictionary) -> void:
 		for npc_id in relations:
 			GameState.set_npc_relation(npc_id, relations[npc_id])
 
-	# Временная отладка.
-	print("--- GAME STATE ---")
-	print("HP: ", GameState.health, "/", GameState.max_health)
-	print("GOOD: ", GameState.good)
-	print("EVIL: ", GameState.evil)
-	print("SKILLS: ", GameState.skills)
-	print("FLAGS: ", GameState.flags)
-	print("NPC RELATIONS: ", GameState.npc_relations)
-	print("------------------")
-
 
 func _on_choice_button_1_pressed() -> void:
 	choose(0)
