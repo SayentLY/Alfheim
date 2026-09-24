@@ -3,6 +3,7 @@ extends Control
 @onready var event_text = $MarginContainer/VBoxContainer/EventText
 @onready var choice_button_1 = $MarginContainer/VBoxContainer/ChoiceButton1
 @onready var choice_button_2 = $MarginContainer/VBoxContainer/ChoiceButton2
+@onready var choice_button_3 = $MarginContainer/VBoxContainer/ChoiceButton3
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -17,6 +18,7 @@ func _ready() -> void:
 
 	choice_button_1.pressed.connect(_on_choice_button_1_pressed)
 	choice_button_2.pressed.connect(_on_choice_button_2_pressed)
+	choice_button_3.pressed.connect(_on_choice_button_3_pressed)
 
 
 func load_chapter_data() -> void:
@@ -77,6 +79,7 @@ func show_event(event_id: String) -> void:
 
 	choice_button_1.hide()
 	choice_button_2.hide()
+	choice_button_3.hide()
 
 	if available_choices.size() >= 1:
 		choice_button_1.text = available_choices[0]["text"]
@@ -85,6 +88,10 @@ func show_event(event_id: String) -> void:
 	if available_choices.size() >= 2:
 		choice_button_2.text = available_choices[1]["text"]
 		choice_button_2.show()
+
+	if available_choices.size() >= 3:
+		choice_button_3.text = available_choices[2]["text"]
+		choice_button_3.show()
 
 
 func check_conditions(choice: Dictionary) -> bool:
@@ -210,3 +217,7 @@ func _on_choice_button_1_pressed() -> void:
 
 func _on_choice_button_2_pressed() -> void:
 	choose(1)
+
+
+func _on_choice_button_3_pressed() -> void:
+	choose(2)
