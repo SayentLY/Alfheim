@@ -464,7 +464,8 @@
           "conditions": {
             "flags": {
               "boy_route": true
-            }
+            },
+            "not_skill": "lockpicking"
           }
         }
       ]
@@ -879,6 +880,9 @@
             "flags": {
               "manor_robbery_participant": false
             }
+          },
+          "effects": {
+            "good": 1
           }
         },
         {
