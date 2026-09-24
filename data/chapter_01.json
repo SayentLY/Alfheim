@@ -1030,7 +1030,12 @@
         },
         {
           "text": "Дальше",
-          "next": "final_choice_outsider"
+          "next": "final_choice_outsider",
+          "conditions": {
+            "flags": {
+              "manor_robbery_participant": false
+            }
+          }
         }
       ]
     },
