@@ -8,6 +8,11 @@ extends Control
 @onready var skills_panel = $SkillsPanel
 @onready var skills_list = $SkillsPanel/PanelMargin/SkillsVBox/SkillsList
 @onready var skills_close_button = $SkillsPanel/PanelMargin/SkillsVBox/CloseButton
+@onready var menu_button = $MenuButton
+@onready var game_menu_panel = $GameMenuPanel
+@onready var menu_continue_button = $GameMenuPanel/PanelMargin/MenuVBox/ContinueButton
+@onready var menu_skills_button = $GameMenuPanel/PanelMargin/MenuVBox/SkillsButton
+@onready var menu_exit_button = $GameMenuPanel/PanelMargin/MenuVBox/ExitButton
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -25,6 +30,10 @@ func _ready() -> void:
 	choice_button_3.pressed.connect(_on_choice_button_3_pressed)
 	skills_button.pressed.connect(_on_skills_button_pressed)
 	skills_close_button.pressed.connect(_on_skills_close_button_pressed)
+	menu_button.pressed.connect(_on_menu_button_pressed)
+	menu_continue_button.pressed.connect(_on_menu_continue_button_pressed)
+	menu_skills_button.pressed.connect(_on_menu_skills_button_pressed)
+	menu_exit_button.pressed.connect(_on_menu_exit_button_pressed)
 
 
 func load_chapter_data() -> void:
@@ -260,3 +269,25 @@ func refresh_skills_panel() -> void:
 				skill_texts.append(str(skill_id))
 
 	skills_list.text = "\n\n".join(skill_texts)
+
+
+func _on_menu_button_pressed() -> void:
+	skills_panel.hide()
+	game_menu_panel.show()
+
+
+func _on_menu_continue_button_pressed() -> void:
+	game_menu_panel.hide()
+
+
+func _on_menu_skills_button_pressed() -> void:
+	game_menu_panel.hide()
+	refresh_skills_panel()
+	skills_panel.show()
+
+
+func _on_menu_exit_button_pressed() -> void:
+	if SaveSystem.save_game():
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	else:
+		print("MENU ERROR: Не удалось сохранить игру перед выходом в главное меню.")
