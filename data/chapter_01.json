@@ -219,7 +219,12 @@
       "choices": [
         {
           "text": "Продолжить путь",
-          "next": "village_arrival"
+          "next": "village_arrival",
+          "effects": {
+            "flags": {
+              "boy_route": true
+            }
+          }
         }
       ]
     },
@@ -228,7 +233,12 @@
       "choices": [
         {
           "text": "Продолжить путь",
-          "next": "village_arrival"
+          "next": "village_arrival",
+          "effects": {
+            "flags": {
+              "boy_route": true
+            }
+          }
         }
       ]
     },
@@ -237,7 +247,12 @@
       "choices": [
         {
           "text": "Продолжить путь",
-          "next": "village_arrival"
+          "next": "village_arrival",
+          "effects": {
+            "flags": {
+              "thief_route": true
+            }
+          }
         }
       ]
     },
@@ -246,7 +261,12 @@
       "choices": [
         {
           "text": "Продолжить путь",
-          "next": "village_arrival"
+          "next": "village_arrival",
+          "effects": {
+            "flags": {
+              "thief_route": true
+            }
+          }
         }
       ]
     },
@@ -292,7 +312,36 @@
       "choices": [
         {
           "text": "Продолжить путь",
-          "next": "village_square"
+          "next": "boy_return_positive",
+          "conditions": {
+            "flags": {
+              "boy_route": true
+            },
+            "npc_relation": {
+              "boy": "positive"
+            }
+          }
+        },
+        {
+          "text": "Продолжить путь",
+          "next": "boy_return_negative",
+          "conditions": {
+            "flags": {
+              "boy_route": true
+            },
+            "npc_relation": {
+              "boy": "negative"
+            }
+          }
+        },
+        {
+          "text": "Продолжить путь",
+          "next": "village_square",
+          "conditions": {
+            "flags": {
+              "thief_route": true
+            }
+          }
         }
       ]
     },
@@ -301,7 +350,36 @@
       "choices": [
         {
           "text": "Продолжить путь",
-          "next": "village_square"
+          "next": "boy_return_positive",
+          "conditions": {
+            "flags": {
+              "boy_route": true
+            },
+            "npc_relation": {
+              "boy": "positive"
+            }
+          }
+        },
+        {
+          "text": "Продолжить путь",
+          "next": "boy_return_negative",
+          "conditions": {
+            "flags": {
+              "boy_route": true
+            },
+            "npc_relation": {
+              "boy": "negative"
+            }
+          }
+        },
+        {
+          "text": "Продолжить путь",
+          "next": "village_square",
+          "conditions": {
+            "flags": {
+              "thief_route": true
+            }
+          }
         }
       ]
     },
@@ -364,6 +442,49 @@
         {
           "text": "Продолжить путь",
           "next": "bandit_encounter"
+        }
+      ]
+    },
+    "boy_return_positive": {
+      "text": "На одной из узких улиц вы вновь заметили знакомого мальчишку. Теперь он сидел вместе с несколькими ребятами возле старого сарая.\n\nВ его руках был небольшой замок. Через несколько мгновений раздался тихий щелчок — дужка открылась без ключа.\n\nЗаметив вас, мальчишка сразу узнал человека, который недавно за него заступился. В благодарность он предложил показать, как это делается.",
+      "choices": [
+        {
+          "text": "Попросить научить",
+          "next": "boy_lockpicking_learned",
+          "effects": {
+            "add_skill": "lockpicking"
+          }
+        },
+        {
+          "text": "Отказаться",
+          "next": "boy_lockpicking_refused"
+        }
+      ]
+    },
+    "boy_lockpicking_learned": {
+      "text": "Объяснял мальчишка быстро, но дело оказалось проще, чем выглядело со стороны.\n\nПосле нескольких неудачных попыток замок наконец поддался и в ваших руках.\n\nТеперь вы знали основы взлома простых замков.",
+      "choices": [
+        {
+          "text": "Продолжить путь",
+          "next": "village_square"
+        }
+      ]
+    },
+    "boy_lockpicking_refused": {
+      "text": "Вы решили, что подобное умение вам ни к чему.\n\nМальчишка лишь пожал плечами и вернулся к своим приятелям.",
+      "choices": [
+        {
+          "text": "Продолжить путь",
+          "next": "village_square"
+        }
+      ]
+    },
+    "boy_return_negative": {
+      "text": "На одной из улиц вы снова заметили знакомого мальчишку. Он сидел с несколькими ребятами возле старого сарая и возился с небольшим замком.\n\nУвидев вас, мальчишка сразу узнал прохожего, который оставил его один на один с разгневанным купцом.\n\nОн отвернулся и продолжил заниматься своими делами.",
+      "choices": [
+        {
+          "text": "Продолжить путь",
+          "next": "village_square"
         }
       ]
     }
