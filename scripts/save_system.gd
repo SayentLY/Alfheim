@@ -21,17 +21,6 @@ func save_game() -> bool:
 	file.store_string(json_text)
 	file.close()
 
-	print("--- GAME SAVED ---")
-	print("PATH: ", SAVE_PATH)
-	print("EVENT: ", GameState.current_event_id)
-	print("HP: ", GameState.health, "/", GameState.max_health)
-	print("GOOD: ", GameState.good)
-	print("EVIL: ", GameState.evil)
-	print("SKILLS: ", GameState.skills)
-	print("FLAGS: ", GameState.flags)
-	print("NPC RELATIONS: ", GameState.npc_relations)
-	print("------------------")
-
 	return true
 
 
@@ -72,17 +61,6 @@ func load_game() -> bool:
 		return false
 
 	_apply_save_data(prepared_data)
-
-	print("--- GAME LOADED ---")
-	print("VERSION: ", prepared_data.get("save_version", 0))
-	print("EVENT: ", GameState.current_event_id)
-	print("HP: ", GameState.health, "/", GameState.max_health)
-	print("GOOD: ", GameState.good)
-	print("EVIL: ", GameState.evil)
-	print("SKILLS: ", GameState.skills)
-	print("FLAGS: ", GameState.flags)
-	print("NPC RELATIONS: ", GameState.npc_relations)
-	print("-------------------")
 
 	return true
 
