@@ -4,6 +4,10 @@ extends Control
 @onready var choice_button_1 = $MarginContainer/VBoxContainer/ChoiceButton1
 @onready var choice_button_2 = $MarginContainer/VBoxContainer/ChoiceButton2
 @onready var choice_button_3 = $MarginContainer/VBoxContainer/ChoiceButton3
+@onready var skills_button = $SkillsButton
+@onready var skills_panel = $SkillsPanel
+@onready var skills_list = $SkillsPanel/PanelMargin/SkillsVBox/SkillsList
+@onready var skills_close_button = $SkillsPanel/PanelMargin/SkillsVBox/CloseButton
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -19,6 +23,8 @@ func _ready() -> void:
 	choice_button_1.pressed.connect(_on_choice_button_1_pressed)
 	choice_button_2.pressed.connect(_on_choice_button_2_pressed)
 	choice_button_3.pressed.connect(_on_choice_button_3_pressed)
+	skills_button.pressed.connect(_on_skills_button_pressed)
+	skills_close_button.pressed.connect(_on_skills_close_button_pressed)
 
 
 func load_chapter_data() -> void:
@@ -228,3 +234,29 @@ func _on_choice_button_2_pressed() -> void:
 
 func _on_choice_button_3_pressed() -> void:
 	choose(2)
+
+
+func _on_skills_button_pressed() -> void:
+	refresh_skills_panel()
+	skills_panel.show()
+
+
+func _on_skills_close_button_pressed() -> void:
+	skills_panel.hide()
+
+
+func refresh_skills_panel() -> void:
+	if GameState.skills.is_empty():
+		skills_list.text = "У вас пока нет изученных навыков."
+		return
+
+	var skill_texts: Array[String] = []
+
+	for skill_id in GameState.skills:
+		match skill_id:
+			"lockpicking":
+				skill_texts.append("Взлом замков\nПозволяет вскрывать простые замки и открывает дополнительные варианты действий.")
+			_:
+				skill_texts.append(str(skill_id))
+
+	skills_list.text = "\n\n".join(skill_texts)
