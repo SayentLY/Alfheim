@@ -11,7 +11,7 @@ extends Control
 @onready var menu_button = $MenuButton
 @onready var game_menu_panel = $GameMenuPanel
 @onready var menu_continue_button = $GameMenuPanel/PanelMargin/MenuVBox/ContinueButton
-@onready var menu_skills_button = $GameMenuPanel/PanelMargin/MenuVBox/SkillsButton
+@onready var menu_settings_button = $GameMenuPanel/PanelMargin/MenuVBox/SettingsButton
 @onready var menu_exit_button = $GameMenuPanel/PanelMargin/MenuVBox/ExitButton
 
 var chapter_data: Dictionary
@@ -32,7 +32,7 @@ func _ready() -> void:
 	skills_close_button.pressed.connect(_on_skills_close_button_pressed)
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	menu_continue_button.pressed.connect(_on_menu_continue_button_pressed)
-	menu_skills_button.pressed.connect(_on_menu_skills_button_pressed)
+	menu_settings_button.pressed.connect(_on_menu_settings_button_pressed)
 	menu_exit_button.pressed.connect(_on_menu_exit_button_pressed)
 
 
@@ -280,10 +280,9 @@ func _on_menu_continue_button_pressed() -> void:
 	game_menu_panel.hide()
 
 
-func _on_menu_skills_button_pressed() -> void:
-	game_menu_panel.hide()
-	refresh_skills_panel()
-	skills_panel.show()
+func _on_menu_settings_button_pressed() -> void:
+	# Настройки добавим отдельным этапом вместе с аудио и финальным UI.
+	pass
 
 
 func _on_menu_exit_button_pressed() -> void:
