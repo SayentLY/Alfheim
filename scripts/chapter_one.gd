@@ -92,6 +92,12 @@ func show_event(event_id: String) -> void:
 		if check_conditions(choice):
 			available_choices.append(choice)
 
+	if available_choices.size() > 3:
+		push_error(
+			"CHOICE LIMIT ERROR: Event '%s' has %d available choices. Maximum allowed is 3."
+			% [event_id, available_choices.size()]
+		)
+
 	choice_button_1.hide()
 	choice_button_2.hide()
 	choice_button_3.hide()
