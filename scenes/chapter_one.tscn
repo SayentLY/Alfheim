@@ -132,3 +132,72 @@ custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Закрыть"
+
+
+[node name="MenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 845.0
+offset_top = 135.0
+offset_right = 1045.0
+offset_bottom = 205.0
+theme_override_font_sizes/font_size = 24
+text = "Меню"
+
+[node name="GameMenuPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = -450.0
+offset_right = 410.0
+offset_bottom = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelMargin" type="MarginContainer" parent="GameMenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 45
+
+[node name="MenuVBox" type="VBoxContainer" parent="GameMenuPanel/PanelMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="GameMenuPanel/PanelMargin/MenuVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Меню"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="GameMenuPanel/PanelMargin/MenuVBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Продолжить"
+
+[node name="SkillsButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Навыки"
+
+[node name="ExitButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Выйти в главное меню"
