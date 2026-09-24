@@ -47,6 +47,11 @@ func load_chapter_data() -> void:
 		current_event_id = chapter_data["start_event"]
 		GameState.current_event_id = current_event_id
 
+		# Сразу сохраняем чистое начало новой игры.
+		# Так старое прохождение не останется в сейве,
+		# даже если игрок выйдет до первого выбора.
+		SaveSystem.save_game()
+
 	show_event(current_event_id)
 
 
