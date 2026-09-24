@@ -108,6 +108,13 @@ func check_conditions(choice: Dictionary) -> bool:
 		if not GameState.has_skill(required_skill):
 			return false
 
+	# Проверка отсутствия навыка.
+	if conditions.has("not_skill"):
+		var forbidden_skill = str(conditions["not_skill"])
+
+		if GameState.has_skill(forbidden_skill):
+			return false
+
 	# Проверка сюжетных флагов.
 	if conditions.has("flags"):
 		var required_flags = conditions["flags"]
