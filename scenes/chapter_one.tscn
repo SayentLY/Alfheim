@@ -190,11 +190,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Продолжить"
 
-[node name="SkillsButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
+[node name="SettingsButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "Навыки"
+text = "Настройки"
 
 [node name="ExitButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
 custom_minimum_size = Vector2(0, 90)
