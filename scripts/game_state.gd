@@ -1,6 +1,11 @@
 extends Node
 
 
+signal health_changed(current_health: int, max_health: int)
+signal skill_unlocked(skill_id: String)
+signal health_depleted
+
+
 # Версия формата сохранения.
 # В будущем позволит обновлять игру, не ломая старые сохранения.
 const SAVE_VERSION: int = 1
@@ -43,6 +48,7 @@ func has_skill(skill_id: String) -> bool:
 func add_skill(skill_id: String) -> void:
 	if not has_skill(skill_id):
 		skills.append(skill_id)
+		skill_unlocked.emit(skill_id)
 
 
 # =========================
@@ -74,11 +80,22 @@ func get_npc_relation(npc_id: String) -> String:
 # =========================
 
 func damage(amount: int) -> void:
+	var previous_health = health
 	health = max(health - amount, 0)
+
+	if health != previous_health:
+		health_changed.emit(health, max_health)
+
+	if previous_health > 0 and health == 0:
+		health_depleted.emit()
 
 
 func heal(amount: int) -> void:
+	var previous_health = health
 	health = min(health + amount, max_health)
+
+	if health != previous_health:
+		health_changed.emit(health, max_health)
 
 
 # =========================
