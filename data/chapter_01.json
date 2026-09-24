@@ -762,7 +762,12 @@
       "choices": [
         {
           "text": "Дождаться утра",
-          "next": "morning_start"
+          "next": "morning_start",
+          "effects": {
+            "flags": {
+              "manor_robbery_participant": true
+            }
+          }
         }
       ]
     }
