@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=19 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" path="res://assets/ui/hp_empty.png" id="11_hp_empty"]
 [ext_resource type="Texture2D" path="res://assets/ui/skills_panel.png" id="12_skills_panel"]
 [ext_resource type="Texture2D" path="res://assets/ui/menu_panel.png" id="13_menu_panel"]
+[ext_resource type="Texture2D" path="res://assets/ui/panel_button_normal.png" id="14_panel_button_normal"]
+[ext_resource type="Texture2D" path="res://assets/ui/panel_button_pressed.png" id="15_panel_button_pressed"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
@@ -25,6 +27,24 @@ axis_stretch_vertical = 0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_pressed"]
 texture = ExtResource("4_choice_pressed")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+axis_stretch_horizontal = 0
+axis_stretch_vertical = 0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel_button_normal"]
+texture = ExtResource("14_panel_button_normal")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+axis_stretch_horizontal = 0
+axis_stretch_vertical = 0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel_button_pressed"]
+texture = ExtResource("15_panel_button_pressed")
 texture_margin_left = 0.0
 texture_margin_top = 0.0
 texture_margin_right = 0.0
@@ -228,6 +248,10 @@ autowrap_mode = 2
 [node name="CloseButton" type="Button" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_font_sizes/font_size = 28
 text = "Закрыть"
 
@@ -283,17 +307,29 @@ layout_mode = 2
 [node name="ContinueButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_font_sizes/font_size = 28
 text = "Продолжить"
 
 [node name="SettingsButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_font_sizes/font_size = 28
 text = "Настройки"
 
 [node name="ExitButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_font_sizes/font_size = 28
 text = "Выйти в главное меню"
