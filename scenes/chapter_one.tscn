@@ -279,48 +279,6 @@ theme_override_constants/h_separation = 28
 theme_override_constants/v_separation = 28
 columns = 4
 
-[node name="SkillInfoArea" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-
-[node name="SkillNameArea" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 0.0
-offset_right = 849.0
-offset_bottom = 50.0
-
-[node name="SkillName" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillNameArea"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-vertical_alignment = 1
-text_overrun_behavior = 3
-
-[node name="SkillDescriptionArea" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 55.0
-offset_right = 849.0
-offset_bottom = 145.0
-
-[node name="SkillDescription" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillDescriptionArea"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
-vertical_alignment = 0
-autowrap_mode = 2
-
 [node name="CloseButtonSpacer" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
@@ -335,6 +293,51 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_presse
 theme_override_styles/focus = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_font_sizes/font_size = 28
 text = "Закрыть"
+
+[node name="SkillInfoArea" type="Control" parent="SkillsPanel"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 585.0
+offset_right = 894.0
+offset_bottom = 735.0
+
+[node name="SkillNameArea" type="Control" parent="SkillsPanel/SkillInfoArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 804.0
+offset_bottom = 45.0
+
+[node name="SkillName" type="Label" parent="SkillsPanel/SkillInfoArea/SkillNameArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="SkillDescriptionArea" type="Control" parent="SkillsPanel/SkillInfoArea"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 50.0
+offset_right = 804.0
+offset_bottom = 130.0
+
+[node name="SkillDescription" type="Label" parent="SkillsPanel/SkillInfoArea/SkillDescriptionArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 0
+autowrap_mode = 2
 
 [node name="MenuButton" type="TextureButton" parent="."]
 layout_mode = 0
