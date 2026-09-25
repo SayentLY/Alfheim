@@ -254,6 +254,8 @@ func _on_skills_button_pressed() -> void:
 		return
 
 	refresh_skills_panel()
+	skills_button.disabled = true
+	menu_button.disabled = true
 	skills_modal_blocker.show()
 	skills_panel.show()
 
@@ -261,6 +263,8 @@ func _on_skills_button_pressed() -> void:
 func _on_skills_close_button_pressed() -> void:
 	skills_panel.hide()
 	skills_modal_blocker.hide()
+	skills_button.disabled = false
+	menu_button.disabled = false
 
 
 func refresh_skills_panel() -> void:
@@ -284,6 +288,8 @@ func _on_menu_button_pressed() -> void:
 	if skills_panel.visible or game_menu_panel.visible:
 		return
 
+	skills_button.disabled = true
+	menu_button.disabled = true
 	menu_modal_blocker.show()
 	game_menu_panel.show()
 
@@ -291,6 +297,8 @@ func _on_menu_button_pressed() -> void:
 func _on_menu_continue_button_pressed() -> void:
 	game_menu_panel.hide()
 	menu_modal_blocker.hide()
+	skills_button.disabled = false
+	menu_button.disabled = false
 
 
 func _on_menu_settings_button_pressed() -> void:
