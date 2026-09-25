@@ -270,18 +270,10 @@ func _on_skills_close_button_pressed() -> void:
 func refresh_skills_panel() -> void:
 	if GameState.skills.is_empty():
 		skills_list.text = "У вас пока нет изученных навыков."
-		return
-
-	var skill_texts: Array[String] = []
-
-	for skill_id in GameState.skills:
-		match skill_id:
-			"lockpicking":
-				skill_texts.append("Взлом замков\nПозволяет вскрывать простые замки и открывает дополнительные варианты действий.")
-			_:
-				skill_texts.append(str(skill_id))
-
-	skills_list.text = "\n\n".join(skill_texts)
+	else:
+		# Иконки изученных навыков будут отображаться здесь.
+		# Название и описание появятся только после нажатия на конкретную иконку.
+		skills_list.text = ""
 
 
 func _on_menu_button_pressed() -> void:
