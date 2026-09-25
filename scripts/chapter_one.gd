@@ -9,8 +9,8 @@ extends Control
 @onready var skills_modal_blocker = $SkillsModalBlocker
 @onready var empty_skills_label = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/EmptySkillsLabel
 @onready var skills_grid = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/SkillsGrid
-@onready var skill_name = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillName
-@onready var skill_description = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillDescription
+@onready var skill_name = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillNameArea/SkillName
+@onready var skill_description = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillDescriptionArea/SkillDescription
 @onready var skills_close_button = $SkillsPanel/PanelMargin/SkillsVBox/CloseButton
 @onready var menu_button = $MenuButton
 @onready var game_menu_panel = $GameMenuPanel
