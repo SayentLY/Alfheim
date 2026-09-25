@@ -249,7 +249,7 @@ layout_mode = 2
 theme_override_constants/separation = 35
 
 [node name="SkillsList" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox"]
-custom_minimum_size = Vector2(0, 560)
+custom_minimum_size = Vector2(0, 610)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "У вас пока нет изученных навыков."
