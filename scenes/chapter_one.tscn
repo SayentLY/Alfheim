@@ -48,9 +48,9 @@ horizontal_alignment = 1
 [node name="StoryArea" type="Control" parent="."]
 layout_mode = 0
 offset_left = 55.0
-offset_top = 475.0
+offset_top = 530.0
 offset_right = 1025.0
-offset_bottom = 1445.0
+offset_bottom = 1500.0
 
 [node name="StoryPanel" type="TextureRect" parent="StoryArea"]
 layout_mode = 1
@@ -84,9 +84,9 @@ autowrap_mode = 2
 [node name="ChoiceButton1" type="Button" parent="." unique_id=1120121839]
 layout_mode = 0
 offset_left = 90.0
-offset_top = 1365.0
+offset_top = 1420.0
 offset_right = 990.0
-offset_bottom = 1523.0
+offset_bottom = 1578.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
@@ -97,9 +97,9 @@ text = "Пойти в деревню"
 [node name="ChoiceButton2" type="Button" parent="." unique_id=1773415175]
 layout_mode = 0
 offset_left = 90.0
-offset_top = 1490.0
+offset_top = 1545.0
 offset_right = 990.0
-offset_bottom = 1648.0
+offset_bottom = 1703.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
@@ -110,9 +110,9 @@ text = "Остаться у дороги"
 [node name="ChoiceButton3" type="Button" parent="."]
 layout_mode = 0
 offset_left = 90.0
-offset_top = 1615.0
+offset_top = 1670.0
 offset_right = 990.0
-offset_bottom = 1773.0
+offset_bottom = 1828.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
