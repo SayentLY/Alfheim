@@ -248,14 +248,35 @@ theme_override_constants/margin_bottom = 45
 layout_mode = 2
 theme_override_constants/separation = 35
 
-[node name="SkillsList" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox"]
+[node name="SkillsTopArea" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(0, 630)
 layout_mode = 2
+
+[node name="EmptySkillsLabel" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 28
 text = "У вас пока нет изученных навыков."
 horizontal_alignment = 1
-vertical_alignment = 0
+vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="SkillsGrid" type="GridContainer" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 55.0
+offset_top = 55.0
+offset_right = -55.0
+offset_bottom = 575.0
+grow_horizontal = 2
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 28
+columns = 4
 
 [node name="CloseButtonSpacer" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(0, 0)
