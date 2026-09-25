@@ -270,10 +270,10 @@ autowrap_mode = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 55.0
-offset_top = 55.0
-offset_right = -55.0
-offset_bottom = 575.0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = -30.0
+offset_bottom = 600.0
 grow_horizontal = 2
 theme_override_constants/h_separation = 28
 theme_override_constants/v_separation = 28
@@ -304,9 +304,9 @@ offset_bottom = 735.0
 [node name="SkillNameArea" type="Control" parent="SkillsPanel/SkillInfoArea"]
 layout_mode = 0
 offset_left = 0.0
-offset_top = 0.0
+offset_top = -20.0
 offset_right = 804.0
-offset_bottom = 45.0
+offset_bottom = 25.0
 
 [node name="SkillName" type="Label" parent="SkillsPanel/SkillInfoArea/SkillNameArea"]
 layout_mode = 1
@@ -323,9 +323,9 @@ text_overrun_behavior = 3
 [node name="SkillDescriptionArea" type="Control" parent="SkillsPanel/SkillInfoArea"]
 layout_mode = 0
 offset_left = 0.0
-offset_top = 50.0
+offset_top = 0.0
 offset_right = 804.0
-offset_bottom = 130.0
+offset_bottom = 80.0
 
 [node name="SkillDescription" type="Label" parent="SkillsPanel/SkillInfoArea/SkillDescriptionArea"]
 layout_mode = 1
