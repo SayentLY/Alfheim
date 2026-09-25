@@ -249,18 +249,20 @@ layout_mode = 2
 theme_override_constants/separation = 35
 
 [node name="SkillsList" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox"]
-custom_minimum_size = Vector2(0, 620)
+custom_minimum_size = Vector2(0, 440)
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_font_sizes/font_size = 28
 text = "У вас пока нет изученных навыков."
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="CloseButtonSpacer" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+
 [node name="CloseButton" type="Button" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(504, 194.4)
 layout_mode = 2
-position = Vector2(0, -180)
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
