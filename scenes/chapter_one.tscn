@@ -248,6 +248,7 @@ autowrap_mode = 2
 [node name="CloseButton" type="Button" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(560, 216)
 layout_mode = 2
+position = Vector2(0, -30)
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
@@ -302,7 +303,7 @@ layout_mode = 2
 theme_override_constants/separation = 30
 
 [node name="Spacer" type="Control" parent="GameMenuPanel/PanelMargin/MenuVBox"]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 
 [node name="ContinueButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
