@@ -31,6 +31,10 @@ var meadow_morning_texture: Texture2D = preload("res://assets/ui/meadow_morning.
 var crossroads_morning_texture: Texture2D = preload("res://assets/ui/crossroads_morning.png")
 var new_village_outskirts_day_texture: Texture2D = preload("res://assets/ui/new_village_outskirts_day.png")
 var forest_path_day_texture: Texture2D = preload("res://assets/ui/forest_path_day.png")
+var village_market_day_texture: Texture2D = preload("res://assets/ui/village_market_day.png")
+var village_street_day_texture: Texture2D = preload("res://assets/ui/village_street_day.png")
+var village_forge_day_texture: Texture2D = preload("res://assets/ui/village_forge_day.png")
+var village_well_day_texture: Texture2D = preload("res://assets/ui/village_well_day.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -162,6 +166,18 @@ func update_background(event_id: String) -> void:
 			background.show()
 		"boy_encounter", "boy_helped", "boy_ignored":
 			background.texture = new_village_outskirts_day_texture
+			background.show()
+		"village_arrival", "bread_theft_failed", "bread_ask_failed", "village_square", "village_square_market":
+			background.texture = village_market_day_texture
+			background.show()
+		"leper_encounter", "leper_help", "leper_rejected":
+			background.texture = village_street_day_texture
+			background.show()
+		"village_square_forge":
+			background.texture = village_forge_day_texture
+			background.show()
+		"village_well", "village_well_listen", "village_well_leave":
+			background.texture = village_well_day_texture
 			background.show()
 		_:
 			# Для остальных событий фон будет добавляться по мере готовности арта.
