@@ -134,9 +134,9 @@ stretch_mode = 5
 [node name="HPFrame" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 195.0
-offset_top = 85.0
-offset_right = 535.0
-offset_bottom = 245.0
+offset_top = 69.0
+offset_right = 603.0
+offset_bottom = 261.0
 texture = ExtResource("7_hp_frame")
 expand_mode = 1
 stretch_mode = 5
