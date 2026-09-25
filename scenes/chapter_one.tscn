@@ -1,6 +1,27 @@
-[gd_scene format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=6 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
+[ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
+[ext_resource type="Texture2D" path="res://assets/ui/choice_normal.png" id="3_choice_normal"]
+[ext_resource type="Texture2D" path="res://assets/ui/choice_pressed.png" id="4_choice_pressed"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
+texture = ExtResource("3_choice_normal")
+texture_margin_left = 180.0
+texture_margin_top = 75.0
+texture_margin_right = 180.0
+texture_margin_bottom = 75.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_pressed"]
+texture = ExtResource("4_choice_pressed")
+texture_margin_left = 180.0
+texture_margin_top = 75.0
+texture_margin_right = 180.0
+texture_margin_bottom = 75.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="ChapterOne" type="Control" unique_id=1810136474]
 layout_mode = 3
@@ -40,6 +61,17 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
+[node name="StoryPanel" type="NinePatchRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_story")
+patch_margin_left = 150
+patch_margin_top = 150
+patch_margin_right = 150
+patch_margin_bottom = 150
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+mouse_filter = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1254543798]
 layout_mode = 2
 theme_override_constants/separation = 28
@@ -48,7 +80,7 @@ theme_override_constants/separation = 28
 custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Ты просыпаешься у дороги. Вдалеке виднеется деревня."
+text = "Вы просыпаетесь у дороги. Вдалеке виднеется деревня."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -56,21 +88,32 @@ autowrap_mode = 2
 [node name="ChoiceButton1" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1120121839]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
+theme_override_styles/focus = SubResource("StyleBoxTexture_choice_normal")
 theme_override_font_sizes/font_size = 28
 text = "Пойти в деревню"
 
 [node name="ChoiceButton2" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1773415175]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
+theme_override_styles/focus = SubResource("StyleBoxTexture_choice_normal")
 theme_override_font_sizes/font_size = 28
 text = "Остаться у дороги"
 
 [node name="ChoiceButton3" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
+theme_override_styles/focus = SubResource("StyleBoxTexture_choice_normal")
 theme_override_font_sizes/font_size = 28
 text = "Третий вариант"
-
 
 [node name="SkillsButton" type="Button" parent="."]
 layout_mode = 0
@@ -132,7 +175,6 @@ custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Закрыть"
-
 
 [node name="MenuButton" type="Button" parent="."]
 layout_mode = 0
