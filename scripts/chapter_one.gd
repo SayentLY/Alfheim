@@ -6,10 +6,12 @@ extends Control
 @onready var choice_button_3 = $ChoiceButton3
 @onready var skills_button = $SkillsButton
 @onready var skills_panel = $SkillsPanel
+@onready var skills_modal_blocker = $SkillsModalBlocker
 @onready var skills_list = $SkillsPanel/PanelMargin/SkillsVBox/SkillsList
 @onready var skills_close_button = $SkillsPanel/PanelMargin/SkillsVBox/CloseButton
 @onready var menu_button = $MenuButton
 @onready var game_menu_panel = $GameMenuPanel
+@onready var menu_modal_blocker = $MenuModalBlocker
 @onready var menu_continue_button = $GameMenuPanel/PanelMargin/MenuVBox/ContinueButton
 @onready var menu_settings_button = $GameMenuPanel/PanelMargin/MenuVBox/SettingsButton
 @onready var menu_exit_button = $GameMenuPanel/PanelMargin/MenuVBox/ExitButton
@@ -248,12 +250,17 @@ func _on_choice_button_3_pressed() -> void:
 
 
 func _on_skills_button_pressed() -> void:
+	if game_menu_panel.visible or skills_panel.visible:
+		return
+
 	refresh_skills_panel()
+	skills_modal_blocker.show()
 	skills_panel.show()
 
 
 func _on_skills_close_button_pressed() -> void:
 	skills_panel.hide()
+	skills_modal_blocker.hide()
 
 
 func refresh_skills_panel() -> void:
@@ -274,12 +281,16 @@ func refresh_skills_panel() -> void:
 
 
 func _on_menu_button_pressed() -> void:
-	skills_panel.hide()
+	if skills_panel.visible or game_menu_panel.visible:
+		return
+
+	menu_modal_blocker.show()
 	game_menu_panel.show()
 
 
 func _on_menu_continue_button_pressed() -> void:
 	game_menu_panel.hide()
+	menu_modal_blocker.hide()
 
 
 func _on_menu_settings_button_pressed() -> void:
