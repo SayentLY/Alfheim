@@ -1,5 +1,6 @@
 extends Control
 
+@onready var background = $Background
 @onready var event_text = $StoryArea/EventText
 @onready var choice_button_1 = $ChoiceButton1
 @onready var choice_button_2 = $ChoiceButton2
@@ -22,6 +23,9 @@ extends Control
 var hp_full_texture: Texture2D = preload("res://assets/ui/hp_full.png")
 var hp_empty_texture: Texture2D = preload("res://assets/ui/hp_empty.png")
 var lockpicking_texture: Texture2D = preload("res://assets/ui/skill_lockpicking.png")
+var home_village_day_texture: Texture2D = preload("res://assets/ui/home_village_day.png")
+var home_forge_day_texture: Texture2D = preload("res://assets/ui/home_forge_day.png")
+var home_village_burning_night_texture: Texture2D = preload("res://assets/ui/home_village_burning_night.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -96,6 +100,7 @@ func show_event(event_id: String) -> void:
 	var choices = event["choices"]
 
 	event_text.text = event["text"]
+	update_background(event_id)
 
 	# Каждый раз создаём новый список доступных вариантов.
 	available_choices.clear()
@@ -125,6 +130,22 @@ func show_event(event_id: String) -> void:
 	if available_choices.size() >= 3:
 		choice_button_3.text = available_choices[2]["text"]
 		choice_button_3.show()
+
+
+func update_background(event_id: String) -> void:
+	match event_id:
+		"prologue_home":
+			background.texture = home_village_day_texture
+			background.show()
+		"prologue_forge":
+			background.texture = home_forge_day_texture
+			background.show()
+		"prologue_raid":
+			background.texture = home_village_burning_night_texture
+			background.show()
+		_:
+			# Для остальных событий фон будет добавляться по мере готовности арта.
+			background.hide()
 
 
 func check_conditions(choice: Dictionary) -> bool:
