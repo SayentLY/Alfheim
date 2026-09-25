@@ -9,8 +9,8 @@ extends Control
 @onready var skills_modal_blocker = $SkillsModalBlocker
 @onready var empty_skills_label = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/EmptySkillsLabel
 @onready var skills_grid = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/SkillsGrid
-@onready var skill_name = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillNameArea/SkillName
-@onready var skill_description = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillDescriptionArea/SkillDescription
+@onready var skill_name = $SkillsPanel/SkillInfoArea/SkillNameArea/SkillName
+@onready var skill_description = $SkillsPanel/SkillInfoArea/SkillDescriptionArea/SkillDescription
 @onready var skills_close_button = $SkillsPanel/PanelMargin/SkillsVBox/CloseButton
 @onready var menu_button = $MenuButton
 @onready var game_menu_panel = $GameMenuPanel
@@ -287,7 +287,7 @@ func refresh_skills_panel() -> void:
 	# Поэтому если какой-то навык пропущен, пробела на его месте не возникает.
 	for skill_id in GameState.skills:
 		var skill_button = TextureButton.new()
-		skill_button.custom_minimum_size = Vector2(170, 170)
+		skill_button.custom_minimum_size = Vector2(136, 136)
 		skill_button.ignore_texture_size = true
 		skill_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		skill_button.set_meta("skill_id", str(skill_id))
