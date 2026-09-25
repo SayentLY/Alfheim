@@ -268,9 +268,9 @@ autowrap_mode = 2
 
 [node name="SkillsGrid" type="GridContainer" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea"]
 layout_mode = 0
-offset_left = 125.0
+offset_left = 155.0
 offset_top = 115.0
-offset_right = 769.0
+offset_right = 799.0
 offset_bottom = 451.0
 theme_override_constants/h_separation = 33
 theme_override_constants/v_separation = 64
@@ -301,9 +301,9 @@ offset_bottom = 735.0
 [node name="SkillNameArea" type="Control" parent="SkillsPanel/SkillInfoArea"]
 layout_mode = 0
 offset_left = 0.0
-offset_top = -40.0
+offset_top = -70.0
 offset_right = 804.0
-offset_bottom = 5.0
+offset_bottom = -25.0
 
 [node name="SkillName" type="Label" parent="SkillsPanel/SkillInfoArea/SkillNameArea"]
 layout_mode = 1
