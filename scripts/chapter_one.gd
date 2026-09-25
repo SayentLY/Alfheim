@@ -7,7 +7,8 @@ extends Control
 @onready var skills_button = $SkillsButton
 @onready var skills_panel = $SkillsPanel
 @onready var skills_modal_blocker = $SkillsModalBlocker
-@onready var skills_list = $SkillsPanel/PanelMargin/SkillsVBox/SkillsList
+@onready var empty_skills_label = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/EmptySkillsLabel
+@onready var skills_grid = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/SkillsGrid
 @onready var skills_close_button = $SkillsPanel/PanelMargin/SkillsVBox/CloseButton
 @onready var menu_button = $MenuButton
 @onready var game_menu_panel = $GameMenuPanel
@@ -268,12 +269,22 @@ func _on_skills_close_button_pressed() -> void:
 
 
 func refresh_skills_panel() -> void:
+	# Перестраиваем список с нуля, чтобы не было пустых фиксированных слотов.
+	for child in skills_grid.get_children():
+		child.queue_free()
+
+	empty_skills_label.visible = GameState.skills.is_empty()
+
 	if GameState.skills.is_empty():
-		skills_list.text = "У вас пока нет изученных навыков."
-	else:
-		# Иконки изученных навыков будут отображаться здесь.
-		# Название и описание появятся только после нажатия на конкретную иконку.
-		skills_list.text = ""
+		return
+
+	# Каждый полученный навык занимает следующую свободную ячейку GridContainer.
+	# Поэтому если какой-то навык пропущен, пробела на его месте не возникает.
+	for skill_id in GameState.skills:
+		var skill_slot = Control.new()
+		skill_slot.custom_minimum_size = Vector2(170, 170)
+		skill_slot.set_meta("skill_id", str(skill_id))
+		skills_grid.add_child(skill_slot)
 
 
 func _on_menu_button_pressed() -> void:
