@@ -1,9 +1,9 @@
 extends Control
 
-@onready var event_text = $MarginContainer/VBoxContainer/EventText
-@onready var choice_button_1 = $MarginContainer/VBoxContainer/ChoiceButton1
-@onready var choice_button_2 = $MarginContainer/VBoxContainer/ChoiceButton2
-@onready var choice_button_3 = $MarginContainer/VBoxContainer/ChoiceButton3
+@onready var event_text = $StoryArea/EventText
+@onready var choice_button_1 = $ChoiceButton1
+@onready var choice_button_2 = $ChoiceButton2
+@onready var choice_button_3 = $ChoiceButton3
 @onready var skills_button = $SkillsButton
 @onready var skills_panel = $SkillsPanel
 @onready var skills_list = $SkillsPanel/PanelMargin/SkillsVBox/SkillsList
