@@ -267,16 +267,13 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="SkillsGrid" type="GridContainer" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 110.0
-offset_top = 90.0
-offset_right = 0.0
-offset_bottom = 610.0
-grow_horizontal = 2
-theme_override_constants/h_separation = 28
-theme_override_constants/v_separation = 28
+layout_mode = 0
+offset_left = 92.0
+offset_top = 82.0
+offset_right = 802.0
+offset_bottom = 478.0
+theme_override_constants/h_separation = 55
+theme_override_constants/v_separation = 124
 columns = 4
 
 [node name="CloseButtonSpacer" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
