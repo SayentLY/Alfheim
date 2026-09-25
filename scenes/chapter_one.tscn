@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=8 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
 [ext_resource type="Texture2D" path="res://assets/ui/choice_normal.png" id="3_choice_normal"]
 [ext_resource type="Texture2D" path="res://assets/ui/choice_pressed.png" id="4_choice_pressed"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills_button.png" id="5_skills"]
+[ext_resource type="Texture2D" path="res://assets/ui/menu_button.png" id="6_menu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
@@ -118,14 +120,15 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_choice_normal")
 theme_override_font_sizes/font_size = 28
 text = "Третий вариант"
 
-[node name="SkillsButton" type="Button" parent="."]
+[node name="SkillsButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 35.0
-offset_top = 135.0
-offset_right = 235.0
-offset_bottom = 205.0
-theme_override_font_sizes/font_size = 24
-text = "Навыки"
+offset_top = 120.0
+offset_right = 195.0
+offset_bottom = 280.0
+texture_normal = ExtResource("5_skills")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="SkillsPanel" type="Panel" parent="."]
 visible = false
@@ -179,14 +182,15 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Закрыть"
 
-[node name="MenuButton" type="Button" parent="."]
+[node name="MenuButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 845.0
-offset_top = 135.0
+offset_left = 885.0
+offset_top = 120.0
 offset_right = 1045.0
-offset_bottom = 205.0
-theme_override_font_sizes/font_size = 24
-text = "Меню"
+offset_bottom = 280.0
+texture_normal = ExtResource("6_menu")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="GameMenuPanel" type="Panel" parent="."]
 visible = false
