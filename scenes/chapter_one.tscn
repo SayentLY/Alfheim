@@ -246,10 +246,9 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="CloseButton" type="Button" parent="SkillsPanel/PanelMargin/SkillsVBox"]
-custom_minimum_size = Vector2(0, 270)
+custom_minimum_size = Vector2(700, 270)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_stretch_ratio = 0.5
 theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
@@ -307,10 +306,9 @@ custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 
 [node name="ContinueButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
-custom_minimum_size = Vector2(0, 270)
+custom_minimum_size = Vector2(700, 270)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_stretch_ratio = 0.5
 theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
@@ -319,10 +317,9 @@ theme_override_font_sizes/font_size = 28
 text = "Продолжить"
 
 [node name="SettingsButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
-custom_minimum_size = Vector2(0, 270)
+custom_minimum_size = Vector2(700, 270)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_stretch_ratio = 0.5
 theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
@@ -331,10 +328,9 @@ theme_override_font_sizes/font_size = 28
 text = "Настройки"
 
 [node name="ExitButton" type="Button" parent="GameMenuPanel/PanelMargin/MenuVBox"]
-custom_minimum_size = Vector2(0, 270)
+custom_minimum_size = Vector2(700, 270)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_stretch_ratio = 0.5
 theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_panel_button_pressed")
