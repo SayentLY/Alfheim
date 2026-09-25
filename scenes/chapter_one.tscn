@@ -190,10 +190,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -410.0
-offset_top = -450.0
-offset_right = 410.0
-offset_bottom = 450.0
+offset_left = -492.0
+offset_top = -540.0
+offset_right = 492.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_skills_panel")
@@ -215,12 +215,6 @@ theme_override_constants/margin_bottom = 45
 [node name="SkillsVBox" type="VBoxContainer" parent="SkillsPanel/PanelMargin"]
 layout_mode = 2
 theme_override_constants/separation = 35
-
-[node name="Title" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Навыки"
-horizontal_alignment = 1
 
 [node name="SkillsList" type="Label" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(0, 620)
@@ -256,10 +250,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -410.0
-offset_top = -450.0
-offset_right = 410.0
-offset_bottom = 450.0
+offset_left = -492.0
+offset_top = -540.0
+offset_right = 492.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("13_menu_panel")
@@ -281,12 +275,6 @@ theme_override_constants/margin_bottom = 45
 [node name="MenuVBox" type="VBoxContainer" parent="GameMenuPanel/PanelMargin"]
 layout_mode = 2
 theme_override_constants/separation = 30
-
-[node name="Title" type="Label" parent="GameMenuPanel/PanelMargin/MenuVBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Меню"
-horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="GameMenuPanel/PanelMargin/MenuVBox"]
 custom_minimum_size = Vector2(0, 120)
