@@ -9,6 +9,8 @@ extends Control
 @onready var skills_modal_blocker = $SkillsModalBlocker
 @onready var empty_skills_label = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/EmptySkillsLabel
 @onready var skills_grid = $SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea/SkillsGrid
+@onready var skill_name = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillName
+@onready var skill_description = $SkillsPanel/PanelMargin/SkillsVBox/SkillInfoArea/SkillDescription
 @onready var skills_close_button = $SkillsPanel/PanelMargin/SkillsVBox/CloseButton
 @onready var menu_button = $MenuButton
 @onready var game_menu_panel = $GameMenuPanel
@@ -19,6 +21,7 @@ extends Control
 @onready var hp_hearts: Array[TextureRect] = [$HPHeart1, $HPHeart2, $HPHeart3]
 var hp_full_texture: Texture2D = preload("res://assets/ui/hp_full.png")
 var hp_empty_texture: Texture2D = preload("res://assets/ui/hp_empty.png")
+var lockpicking_texture: Texture2D = preload("res://assets/ui/skill_lockpicking.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -273,6 +276,8 @@ func refresh_skills_panel() -> void:
 	for child in skills_grid.get_children():
 		child.queue_free()
 
+	skill_name.text = ""
+	skill_description.text = ""
 	empty_skills_label.visible = GameState.skills.is_empty()
 
 	if GameState.skills.is_empty():
@@ -281,11 +286,30 @@ func refresh_skills_panel() -> void:
 	# Каждый полученный навык занимает следующую свободную ячейку GridContainer.
 	# Поэтому если какой-то навык пропущен, пробела на его месте не возникает.
 	for skill_id in GameState.skills:
-		var skill_slot = Control.new()
-		skill_slot.custom_minimum_size = Vector2(170, 170)
-		skill_slot.set_meta("skill_id", str(skill_id))
-		skills_grid.add_child(skill_slot)
+		var skill_button = TextureButton.new()
+		skill_button.custom_minimum_size = Vector2(170, 170)
+		skill_button.ignore_texture_size = true
+		skill_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		skill_button.set_meta("skill_id", str(skill_id))
 
+		match str(skill_id):
+			"lockpicking":
+				skill_button.texture_normal = lockpicking_texture
+			_:
+				continue
+
+		skill_button.pressed.connect(_on_skill_icon_pressed.bind(str(skill_id)))
+		skills_grid.add_child(skill_button)
+
+
+func _on_skill_icon_pressed(skill_id: String) -> void:
+	match skill_id:
+		"lockpicking":
+			skill_name.text = "Взлом замков"
+			skill_description.text = "Вы умеете взламывать замки"
+		_:
+			skill_name.text = ""
+			skill_description.text = ""
 
 func _on_menu_button_pressed() -> void:
 	if skills_panel.visible or game_menu_panel.visible:
