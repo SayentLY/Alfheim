@@ -253,7 +253,8 @@ custom_minimum_size = Vector2(0, 630)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "У вас пока нет изученных навыков."
-vertical_alignment = 1
+horizontal_alignment = 1
+vertical_alignment = 0
 autowrap_mode = 2
 
 [node name="CloseButtonSpacer" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
