@@ -268,12 +268,12 @@ autowrap_mode = 2
 
 [node name="SkillsGrid" type="GridContainer" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea"]
 layout_mode = 0
-offset_left = 92.0
-offset_top = 82.0
-offset_right = 802.0
-offset_bottom = 478.0
-theme_override_constants/h_separation = 55
-theme_override_constants/v_separation = 124
+offset_left = 125.0
+offset_top = 115.0
+offset_right = 769.0
+offset_bottom = 451.0
+theme_override_constants/h_separation = 33
+theme_override_constants/v_separation = 64
 columns = 4
 
 [node name="CloseButtonSpacer" type="Control" parent="SkillsPanel/PanelMargin/SkillsVBox"]
@@ -301,16 +301,17 @@ offset_bottom = 735.0
 [node name="SkillNameArea" type="Control" parent="SkillsPanel/SkillInfoArea"]
 layout_mode = 0
 offset_left = 0.0
-offset_top = -20.0
+offset_top = -40.0
 offset_right = 804.0
-offset_bottom = 25.0
+offset_bottom = 5.0
 
 [node name="SkillName" type="Label" parent="SkillsPanel/SkillInfoArea/SkillNameArea"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_top = -20.0
-offset_bottom = 25.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
