@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=13 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" path="res://assets/ui/skills_button_pressed.png" id="8_skills_pressed"]
 [ext_resource type="Texture2D" path="res://assets/ui/menu_button_pressed.png" id="9_menu_pressed"]
 [ext_resource type="Texture2D" path="res://assets/ui/hp_full.png" id="10_hp_full"]
+[ext_resource type="Texture2D" path="res://assets/ui/hp_empty.png" id="11_hp_empty"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
