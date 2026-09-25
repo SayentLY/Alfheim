@@ -7,6 +7,7 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
+region_rect = Rect2(0, 145, 2048, 360)
 texture_margin_left = 180.0
 texture_margin_top = 75.0
 texture_margin_right = 180.0
@@ -16,6 +17,7 @@ axis_stretch_vertical = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_pressed"]
 texture = ExtResource("4_choice_pressed")
+region_rect = Rect2(0, 145, 2048, 360)
 texture_margin_left = 180.0
 texture_margin_top = 75.0
 texture_margin_right = 180.0
@@ -67,13 +69,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 135.0
-offset_top = 150.0
-offset_right = -135.0
-offset_bottom = -150.0
+offset_left = 125.0
+offset_top = 125.0
+offset_right = -125.0
+offset_bottom = -125.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 26
 text = "Вы просыпаетесь у дороги. Вдалеке виднеется деревня."
 horizontal_alignment = 1
 vertical_alignment = 1
