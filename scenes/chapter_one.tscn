@@ -268,9 +268,9 @@ autowrap_mode = 2
 
 [node name="SkillsGrid" type="GridContainer" parent="SkillsPanel/PanelMargin/SkillsVBox/SkillsTopArea"]
 layout_mode = 0
-offset_left = 155.0
+offset_left = 175.0
 offset_top = 115.0
-offset_right = 799.0
+offset_right = 819.0
 offset_bottom = 451.0
 theme_override_constants/h_separation = 33
 theme_override_constants/v_separation = 64
