@@ -7,7 +7,7 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
-region_rect = Rect2(0, 145, 1536, 360)
+region_rect = Rect2(0, 145, 2048, 360)
 texture_margin_left = 180.0
 texture_margin_top = 75.0
 texture_margin_right = 180.0
@@ -17,7 +17,7 @@ axis_stretch_vertical = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_pressed"]
 texture = ExtResource("4_choice_pressed")
-region_rect = Rect2(0, 145, 1536, 360)
+region_rect = Rect2(0, 145, 2048, 360)
 texture_margin_left = 180.0
 texture_margin_top = 75.0
 texture_margin_right = 180.0
@@ -83,10 +83,10 @@ autowrap_mode = 2
 
 [node name="ChoiceButton1" type="Button" parent="." unique_id=1120121839]
 layout_mode = 0
-offset_left = 90.0
+offset_left = 10.0
 offset_top = 1415.0
 offset_right = 990.0
-offset_bottom = 1520.0
+offset_bottom = 1510.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
@@ -96,10 +96,10 @@ text = "Пойти в деревню"
 
 [node name="ChoiceButton2" type="Button" parent="." unique_id=1773415175]
 layout_mode = 0
-offset_left = 90.0
-offset_top = 1560.0
+offset_left = 10.0
+offset_top = 1595.0
 offset_right = 990.0
-offset_bottom = 1665.0
+offset_bottom = 1690.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
@@ -109,10 +109,10 @@ text = "Остаться у дороги"
 
 [node name="ChoiceButton3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 90.0
-offset_top = 1705.0
+offset_left = 10.0
+offset_top = 1775.0
 offset_right = 990.0
-offset_bottom = 1810.0
+offset_bottom = 1870.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
