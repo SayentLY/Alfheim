@@ -202,6 +202,17 @@ expand_mode = 1
 stretch_mode = 5
 mouse_filter = 2
 
+[node name="SkillsModalBlocker" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0)
+
 [node name="SkillsPanel" type="TextureRect" parent="."]
 visible = false
 layout_mode = 1
@@ -248,7 +259,7 @@ autowrap_mode = 2
 [node name="CloseButton" type="Button" parent="SkillsPanel/PanelMargin/SkillsVBox"]
 custom_minimum_size = Vector2(560, 216)
 layout_mode = 2
-position = Vector2(0, -30)
+position = Vector2(0, -80)
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxTexture_panel_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_panel_button_normal")
@@ -267,6 +278,17 @@ texture_normal = ExtResource("6_menu")
 texture_pressed = ExtResource("9_menu_pressed")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="MenuModalBlocker" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0)
 
 [node name="GameMenuPanel" type="TextureRect" parent="."]
 visible = false
