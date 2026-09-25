@@ -26,6 +26,11 @@ var lockpicking_texture: Texture2D = preload("res://assets/ui/skill_lockpicking.
 var home_village_day_texture: Texture2D = preload("res://assets/ui/home_village_day.png")
 var home_forge_day_texture: Texture2D = preload("res://assets/ui/home_forge_day.png")
 var home_village_burning_night_texture: Texture2D = preload("res://assets/ui/home_village_burning_night.png")
+var forest_escape_dawn_texture: Texture2D = preload("res://assets/ui/forest_escape_dawn.png")
+var meadow_morning_texture: Texture2D = preload("res://assets/ui/meadow_morning.png")
+var crossroads_morning_texture: Texture2D = preload("res://assets/ui/crossroads_morning.png")
+var new_village_outskirts_day_texture: Texture2D = preload("res://assets/ui/new_village_outskirts_day.png")
+var forest_path_day_texture: Texture2D = preload("res://assets/ui/forest_path_day.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -142,6 +147,21 @@ func update_background(event_id: String) -> void:
 			background.show()
 		"prologue_raid":
 			background.texture = home_village_burning_night_texture
+			background.show()
+		"prologue_meadow":
+			background.texture = forest_escape_dawn_texture
+			background.show()
+		"meadow_start", "meadow_path", "meadow_cross":
+			background.texture = meadow_morning_texture
+			background.show()
+		"crossroads":
+			background.texture = crossroads_morning_texture
+			background.show()
+		"thief_encounter", "thief_ignore", "thief_nosy":
+			background.texture = forest_path_day_texture
+			background.show()
+		"boy_encounter", "boy_helped", "boy_ignored":
+			background.texture = new_village_outskirts_day_texture
 			background.show()
 		_:
 			# Для остальных событий фон будет добавляться по мере готовности арта.
