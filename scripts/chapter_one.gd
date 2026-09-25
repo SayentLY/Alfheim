@@ -13,6 +13,9 @@ extends Control
 @onready var menu_continue_button = $GameMenuPanel/PanelMargin/MenuVBox/ContinueButton
 @onready var menu_settings_button = $GameMenuPanel/PanelMargin/MenuVBox/SettingsButton
 @onready var menu_exit_button = $GameMenuPanel/PanelMargin/MenuVBox/ExitButton
+@onready var hp_hearts: Array[TextureRect] = [$HPHeart1, $HPHeart2, $HPHeart3]
+var hp_full_texture: Texture2D = preload("res://assets/ui/hp_full.png")
+var hp_empty_texture: Texture2D = preload("res://assets/ui/hp_empty.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -24,6 +27,9 @@ var available_choices: Array = []
 
 func _ready() -> void:
 	load_chapter_data()
+
+	GameState.health_changed.connect(_on_health_changed)
+	update_health_display(GameState.health, GameState.max_health)
 
 	choice_button_1.pressed.connect(_on_choice_button_1_pressed)
 	choice_button_2.pressed.connect(_on_choice_button_2_pressed)
@@ -286,3 +292,15 @@ func _on_menu_exit_button_pressed() -> void:
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 	else:
 		print("MENU ERROR: Не удалось сохранить игру перед выходом в главное меню.")
+
+
+func _on_health_changed(current_health: int, max_health: int) -> void:
+	update_health_display(current_health, max_health)
+
+
+func update_health_display(current_health: int, max_health: int) -> void:
+	for i in range(hp_hearts.size()):
+		if i < current_health:
+			hp_hearts[i].texture = hp_full_texture
+		else:
+			hp_hearts[i].texture = hp_empty_texture
