@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=23 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" path="res://assets/ui/panel_button_normal.png" id="14_panel_button_normal"]
 [ext_resource type="Texture2D" path="res://assets/ui/panel_button_pressed.png" id="15_panel_button_pressed"]
 [ext_resource type="Texture2D" path="res://assets/ui/skill_lockpicking.png" id="16_skill_lockpicking"]
+[ext_resource type="Texture2D" path="res://assets/ui/home_village_day.png" id="17_home_village_day"]
+[ext_resource type="Texture2D" path="res://assets/ui/home_forge_day.png" id="18_home_forge_day"]
+[ext_resource type="Texture2D" path="res://assets/ui/home_village_burning_night.png" id="19_home_village_burning_night"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
@@ -61,6 +64,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8jvkd")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_home_village_day")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="StoryArea" type="Control" parent="."]
 layout_mode = 0
