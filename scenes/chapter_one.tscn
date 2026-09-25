@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=8 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" path="res://assets/ui/choice_pressed.png" id="4_choice_pressed"]
 [ext_resource type="Texture2D" path="res://assets/ui/skills_button.png" id="5_skills"]
 [ext_resource type="Texture2D" path="res://assets/ui/menu_button.png" id="6_menu"]
-[ext_resource type="Texture2D" path="res://assets/ui/hp_frame.png" id="7_hp_frame"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
@@ -130,17 +129,6 @@ offset_bottom = 245.0
 texture_normal = ExtResource("5_skills")
 ignore_texture_size = true
 stretch_mode = 5
-
-[node name="HPFrame" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 195.0
-offset_top = 69.0
-offset_right = 603.0
-offset_bottom = 261.0
-texture = ExtResource("7_hp_frame")
-expand_mode = 1
-stretch_mode = 5
-mouse_filter = 2
 
 [node name="SkillsPanel" type="Panel" parent="."]
 visible = false
