@@ -149,9 +149,9 @@ mouse_filter = 2
 [node name="HPHeart1" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 350.0
-offset_top = 115.0
+offset_top = 125.0
 offset_right = 470.0
-offset_bottom = 235.0
+offset_bottom = 245.0
 texture = ExtResource("10_hp_full")
 expand_mode = 1
 stretch_mode = 5
@@ -160,9 +160,9 @@ mouse_filter = 2
 [node name="HPHeart2" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 480.0
-offset_top = 115.0
+offset_top = 125.0
 offset_right = 600.0
-offset_bottom = 235.0
+offset_bottom = 245.0
 texture = ExtResource("10_hp_full")
 expand_mode = 1
 stretch_mode = 5
@@ -171,9 +171,9 @@ mouse_filter = 2
 [node name="HPHeart3" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 610.0
-offset_top = 115.0
+offset_top = 125.0
 offset_right = 730.0
-offset_bottom = 235.0
+offset_bottom = 245.0
 texture = ExtResource("10_hp_full")
 expand_mode = 1
 stretch_mode = 5
