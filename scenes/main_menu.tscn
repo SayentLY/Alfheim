@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://01td17oddjc8"]
+[gd_scene load_steps=5 format=3 uid="uid://01td17oddjc8"]
 
 [ext_resource type="Script" uid="uid://du0mr5ti8hrso" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" path="res://assets/ui/main_menu_background.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/ui/panel_button_normal.png" id="3_button_normal"]
+[ext_resource type="Texture2D" path="res://assets/ui/panel_button_pressed.png" id="4_button_pressed"]
 
 [node name="MainMenu" type="Control" unique_id=1838662121]
 layout_mode = 3
@@ -10,6 +13,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=515139559]
 layout_mode = 1
@@ -21,21 +36,91 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1795257411]
 layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 2
 
-[node name="Title" type="Label" parent="CenterContainer/VBoxContainer" unique_id=2045196981]
+[node name="NewGameButton" type="TextureButton" parent="CenterContainer/VBoxContainer" unique_id=99147797]
+custom_minimum_size = Vector2(560, 216)
 layout_mode = 2
-text = "ALFHEIM"
+texture_normal = ExtResource("3_button_normal")
+texture_pressed = ExtResource("4_button_pressed")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=99147797]
-layout_mode = 2
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/NewGameButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
 text = "Новая игра"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2004490075]
+[node name="ContinueButton" type="TextureButton" parent="CenterContainer/VBoxContainer" unique_id=2004490075]
+custom_minimum_size = Vector2(560, 216)
 layout_mode = 2
+texture_normal = ExtResource("3_button_normal")
+texture_pressed = ExtResource("4_button_pressed")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/ContinueButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
 text = "Продолжить"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=417663129]
+[node name="SettingsButton" type="TextureButton" parent="CenterContainer/VBoxContainer" unique_id=417663129]
+custom_minimum_size = Vector2(560, 216)
 layout_mode = 2
+texture_normal = ExtResource("3_button_normal")
+texture_pressed = ExtResource("4_button_pressed")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/SettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
 text = "Настройки"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(560, 216)
+layout_mode = 2
+texture_normal = ExtResource("3_button_normal")
+texture_pressed = ExtResource("4_button_pressed")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/ExitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
+text = "Выход"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
