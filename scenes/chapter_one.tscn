@@ -95,9 +95,9 @@ text = "Пойти в деревню"
 [node name="ChoiceButton2" type="Button" parent="." unique_id=1773415175]
 layout_mode = 0
 offset_left = 90.0
-offset_top = 1475.0
+offset_top = 1445.0
 offset_right = 990.0
-offset_bottom = 1633.0
+offset_bottom = 1603.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
@@ -108,9 +108,9 @@ text = "Остаться у дороги"
 [node name="ChoiceButton3" type="Button" parent="."]
 layout_mode = 0
 offset_left = 90.0
-offset_top = 1630.0
+offset_top = 1570.0
 offset_right = 990.0
-offset_bottom = 1788.0
+offset_bottom = 1728.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_choice_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_choice_pressed")
