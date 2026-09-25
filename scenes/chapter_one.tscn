@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=15 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" path="res://assets/ui/menu_button_pressed.png" id="9_menu_pressed"]
 [ext_resource type="Texture2D" path="res://assets/ui/hp_full.png" id="10_hp_full"]
 [ext_resource type="Texture2D" path="res://assets/ui/hp_empty.png" id="11_hp_empty"]
+[ext_resource type="Texture2D" path="res://assets/ui/skills_panel.png" id="12_skills_panel"]
+[ext_resource type="Texture2D" path="res://assets/ui/menu_panel.png" id="13_menu_panel"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
@@ -180,7 +182,7 @@ expand_mode = 1
 stretch_mode = 5
 mouse_filter = 2
 
-[node name="SkillsPanel" type="Panel" parent="."]
+[node name="SkillsPanel" type="TextureRect" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -194,6 +196,9 @@ offset_right = 410.0
 offset_bottom = 450.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("12_skills_panel")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PanelMargin" type="MarginContainer" parent="SkillsPanel"]
 layout_mode = 1
@@ -243,7 +248,7 @@ texture_pressed = ExtResource("9_menu_pressed")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="GameMenuPanel" type="Panel" parent="."]
+[node name="GameMenuPanel" type="TextureRect" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -257,6 +262,9 @@ offset_right = 410.0
 offset_bottom = 450.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("13_menu_panel")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PanelMargin" type="MarginContainer" parent="GameMenuPanel"]
 layout_mode = 1
