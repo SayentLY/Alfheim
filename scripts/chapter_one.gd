@@ -201,7 +201,7 @@ func update_background(event_id: String) -> void:
 		"crossroads":
 			background.texture = crossroads_morning_texture
 			background.show()
-		"thief_encounter", "thief_ignore", "thief_nosy":
+		"thief_encounter", "thief_silent", "thief_nosy":
 			background.texture = forest_path_day_texture
 			background.show()
 		"boy_encounter", "boy_helped", "boy_ignored":
