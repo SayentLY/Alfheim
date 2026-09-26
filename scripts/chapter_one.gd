@@ -35,6 +35,8 @@ var village_market_day_texture: Texture2D = preload("res://assets/ui/village_mar
 var village_street_day_texture: Texture2D = preload("res://assets/ui/village_street_day.png")
 var village_forge_day_texture: Texture2D = preload("res://assets/ui/village_forge_day.png")
 var village_well_day_texture: Texture2D = preload("res://assets/ui/village_well_day.png")
+var village_barn_alley_day_texture: Texture2D = preload("res://assets/ui/village_barn_alley_day.png")
+var bandit_hideout_evening_texture: Texture2D = preload("res://assets/ui/bandit_hideout_evening.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -178,6 +180,12 @@ func update_background(event_id: String) -> void:
 			background.show()
 		"village_well", "village_well_listen", "village_well_leave":
 			background.texture = village_well_day_texture
+			background.show()
+		"boy_return_positive", "boy_lockpicking_learned", "boy_lockpicking_refused", "boy_return_negative":
+			background.texture = village_barn_alley_day_texture
+			background.show()
+		"bandit_route", "bandit_thief_positive", "bandit_thief_join", "bandit_thief_training", "bandit_thief_refuse", "bandit_thief_refuse_training", "bandit_thief_leave", "bandit_thief_negative", "bandit_thief_driven_away", "bandit_boy_skilled", "bandit_boy_join", "bandit_boy_refuse", "bandit_boy_unskilled", "bandit_boy_unskilled_leave":
+			background.texture = bandit_hideout_evening_texture
 			background.show()
 		_:
 			# Для остальных событий фон будет добавляться по мере готовности арта.
