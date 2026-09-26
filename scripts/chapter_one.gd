@@ -184,7 +184,7 @@ func update_character_portrait(event_id: String) -> void:
 		"fortune_teller", "fortune_teller_accept", "fortune_teller_refuse":
 			character_portrait.texture = fortune_teller_texture
 			character_portrait.show()
-		"guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
+		"post_cart", "guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
 			character_portrait.texture = guard_texture
 			character_portrait.show()
 		"village_arrival", "bread_theft_failed", "bread_ask_failed":
