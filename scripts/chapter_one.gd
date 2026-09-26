@@ -50,6 +50,10 @@ var boy_angry_texture: Texture2D = preload("res://assets/ui/boy_angry.png")
 var thief_neutral_texture: Texture2D = preload("res://assets/ui/thief_neutral.png")
 var thief_angry_texture: Texture2D = preload("res://assets/ui/thief_angry.png")
 var thief_friendly_texture: Texture2D = preload("res://assets/ui/thief_friendly.png")
+var fortune_teller_texture: Texture2D = preload("res://assets/ui/fortune_teller.png")
+var guard_texture: Texture2D = preload("res://assets/ui/guard.png")
+var peasant_grumpy_texture: Texture2D = preload("res://assets/ui/peasant_grumpy.png")
+var peasant_pleading_texture: Texture2D = preload("res://assets/ui/peasant_pleading.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -176,6 +180,18 @@ func update_character_portrait(event_id: String) -> void:
 			character_portrait.show()
 		"thief_nosy", "bandit_thief_negative", "bandit_thief_driven_away":
 			character_portrait.texture = thief_angry_texture
+			character_portrait.show()
+		"fortune_teller", "fortune_teller_accept", "fortune_teller_refuse":
+			character_portrait.texture = fortune_teller_texture
+			character_portrait.show()
+		"guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
+			character_portrait.texture = guard_texture
+			character_portrait.show()
+		"bread_theft_failed", "bread_ask_failed":
+			character_portrait.texture = peasant_grumpy_texture
+			character_portrait.show()
+		"village_cart_help", "village_cart_leave":
+			character_portrait.texture = peasant_pleading_texture
 			character_portrait.show()
 		_:
 			character_portrait.hide()
