@@ -5,12 +5,15 @@ extends Control
 @onready var settings_button = $CenterContainer/VBoxContainer/SettingsButton
 @onready var exit_button = $CenterContainer/VBoxContainer/ExitButton
 @onready var fade_overlay = $FadeOverlay
+@onready var loading_overlay = $LoadingOverlay
+@onready var loading_label = $LoadingOverlay/LoadingLabel
 
 const MENU_FADE_IN_TIME := 0.45
 const BUTTON_FADE_TIME := 0.28
 const BUTTON_STAGGER := 0.09
 const MENU_FADE_OUT_TIME := 0.25
-const SCREEN_FADE_OUT_TIME := 0.45
+const SCREEN_FADE_OUT_TIME := 0.25
+const GAME_SCENE_PATH := "res://scenes/chapter_one.tscn"
 
 var is_transitioning := false
 
@@ -59,21 +62,54 @@ func transition_to_game() -> void:
 	is_transitioning = true
 	set_menu_input_enabled(false)
 
-	# Сначала мягко убираем сами кнопки.
+	# Кнопки мягко уходят, но мы больше не держим игрока на пустом чёрном экране.
 	var buttons = [new_game_button, continue_button, settings_button, exit_button]
 	var buttons_tween = create_tween().set_parallel(true)
 	for button in buttons:
 		buttons_tween.tween_property(button, "modulate:a", 0.0, MENU_FADE_OUT_TIME)
 	await buttons_tween.finished
 
-	# Затем поверх меню плавно приходит чёрный экран.
 	fade_overlay.modulate.a = 0.0
 	fade_overlay.show()
 	var fade_tween = create_tween()
 	fade_tween.tween_property(fade_overlay, "modulate:a", 1.0, SCREEN_FADE_OUT_TIME)
 	await fade_tween.finished
 
-	get_tree().change_scene_to_file("res://scenes/chapter_one.tscn")
+	# Отдельный экран загрузки остаётся отрисованным, пока тяжёлая игровая
+	# сцена загружается в фоне. Серый viewport между сценами не показывается.
+	loading_overlay.show()
+	loading_overlay.move_to_front()
+	fade_overlay.hide()
+
+	var request_error = ResourceLoader.load_threaded_request(GAME_SCENE_PATH)
+	if request_error != OK:
+		push_error("Не удалось начать загрузку Chapter I.")
+		is_transitioning = false
+		return
+
+	var progress: Array = []
+	var dot_step := 0
+	while true:
+		var status = ResourceLoader.load_threaded_get_status(GAME_SCENE_PATH, progress)
+
+		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			break
+		if status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+			push_error("Ошибка загрузки Chapter I.")
+			is_transitioning = false
+			return
+
+		dot_step = (dot_step + 1) % 4
+		loading_label.text = "Загрузка" + ".".repeat(dot_step)
+		await get_tree().process_frame
+
+	var packed_scene = ResourceLoader.load_threaded_get(GAME_SCENE_PATH) as PackedScene
+	if packed_scene == null:
+		push_error("Chapter I загрузилась некорректно.")
+		is_transitioning = false
+		return
+
+	get_tree().change_scene_to_packed(packed_scene)
 
 
 func _on_new_game_button_pressed() -> void:
