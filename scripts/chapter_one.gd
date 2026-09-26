@@ -47,6 +47,9 @@ var village_fire_night_texture: Texture2D = preload("res://assets/ui/village_fir
 var boy_pleading_texture: Texture2D = preload("res://assets/ui/boy_pleading.png")
 var boy_friendly_texture: Texture2D = preload("res://assets/ui/boy_friendly.png")
 var boy_angry_texture: Texture2D = preload("res://assets/ui/boy_angry.png")
+var thief_neutral_texture: Texture2D = preload("res://assets/ui/thief_neutral.png")
+var thief_angry_texture: Texture2D = preload("res://assets/ui/thief_angry.png")
+var thief_friendly_texture: Texture2D = preload("res://assets/ui/thief_friendly.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -164,6 +167,15 @@ func update_character_portrait(event_id: String) -> void:
 			character_portrait.show()
 		"boy_ignored", "boy_return_negative":
 			character_portrait.texture = boy_angry_texture
+			character_portrait.show()
+		"thief_encounter":
+			character_portrait.texture = thief_neutral_texture
+			character_portrait.show()
+		"thief_silent", "bandit_thief_positive", "bandit_thief_join", "bandit_thief_training", "bandit_thief_refuse", "bandit_thief_refuse_training", "bandit_thief_leave":
+			character_portrait.texture = thief_friendly_texture
+			character_portrait.show()
+		"thief_nosy", "bandit_thief_negative", "bandit_thief_driven_away":
+			character_portrait.texture = thief_angry_texture
 			character_portrait.show()
 		_:
 			character_portrait.hide()
