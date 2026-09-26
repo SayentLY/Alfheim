@@ -187,10 +187,10 @@ func update_character_portrait(event_id: String) -> void:
 		"guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
 			character_portrait.texture = guard_texture
 			character_portrait.show()
-		"bread_theft_failed", "bread_ask_failed":
+		"village_arrival", "bread_theft_failed", "bread_ask_failed":
 			character_portrait.texture = peasant_grumpy_texture
 			character_portrait.show()
-		"village_cart_help", "village_cart_leave":
+		"post_fortune", "village_cart_help", "village_cart_leave":
 			character_portrait.texture = peasant_pleading_texture
 			character_portrait.show()
 		_:
