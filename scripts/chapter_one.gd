@@ -62,6 +62,26 @@ var current_event_id: String
 # которые сейчас доступны игроку.
 var available_choices: Array = []
 
+# Общие параметры анимаций. Меняем их здесь, чтобы весь Chapter I
+# оставался визуально единообразным.
+const INPUT_LOCK_TIME := 0.65
+const TEXT_FADE_TIME := 0.20
+const LOCATION_FADE_OUT := 0.24
+const LOCATION_FADE_IN := 0.32
+const LOCATION_FADE_NIGHT := 0.40
+const CHARACTER_FADE_TIME := 0.35
+const CHARACTER_RISE_PX := 20.0
+const CHOICE_FADE_TIME := 0.22
+const CHOICE_STAGGER := 0.07
+const PANEL_ANIMATION_TIME := 0.20
+const BACKGROUND_ZOOM_TIME := 20.0
+const BACKGROUND_ZOOM_SCALE := 1.03
+const HP_PULSE_TIME := 0.12
+
+var is_transitioning := false
+var background_motion_tween: Tween
+var character_base_position := Vector2.ZERO
+
 
 func _ready() -> void:
 	load_chapter_data()
@@ -78,6 +98,12 @@ func _ready() -> void:
 	menu_continue_button.pressed.connect(_on_menu_continue_button_pressed)
 	menu_settings_button.pressed.connect(_on_menu_settings_button_pressed)
 	menu_exit_button.pressed.connect(_on_menu_exit_button_pressed)
+
+	character_base_position = character_portrait.position
+	background.pivot_offset = background.size / 2.0
+	skills_panel.pivot_offset = skills_panel.size / 2.0
+	game_menu_panel.pivot_offset = game_menu_panel.size / 2.0
+	start_background_motion()
 
 
 func load_chapter_data() -> void:
@@ -125,13 +151,14 @@ func show_event(event_id: String) -> void:
 	GameState.current_event_id = event_id
 
 	var event = chapter_data["events"][event_id]
-	var choices = event["choices"]
-
 	event_text.text = event["text"]
 	update_background(event_id)
 	update_character_portrait(event_id)
+	rebuild_choices(event["choices"])
+	show_choices_immediately()
 
-	# Каждый раз создаём новый список доступных вариантов.
+
+func rebuild_choices(choices: Array) -> void:
 	available_choices.clear()
 
 	for choice in choices:
@@ -141,127 +168,238 @@ func show_event(event_id: String) -> void:
 	if available_choices.size() > 3:
 		push_error(
 			"CHOICE LIMIT ERROR: Event '%s' has %d available choices. Maximum allowed is 3."
-			% [event_id, available_choices.size()]
+			% [current_event_id, available_choices.size()]
 		)
 
-	choice_button_1.hide()
-	choice_button_2.hide()
-	choice_button_3.hide()
+	var buttons = [choice_button_1, choice_button_2, choice_button_3]
+	for button in buttons:
+		button.hide()
+		button.disabled = true
 
-	if available_choices.size() >= 1:
-		choice_button_1.text = available_choices[0]["text"]
-		choice_button_1.show()
+	for i in range(min(available_choices.size(), 3)):
+		buttons[i].text = available_choices[i]["text"]
 
-	if available_choices.size() >= 2:
-		choice_button_2.text = available_choices[1]["text"]
-		choice_button_2.show()
 
-	if available_choices.size() >= 3:
-		choice_button_3.text = available_choices[2]["text"]
-		choice_button_3.show()
+func show_choices_immediately() -> void:
+	var buttons = [choice_button_1, choice_button_2, choice_button_3]
+	for i in range(min(available_choices.size(), 3)):
+		buttons[i].modulate.a = 1.0
+		buttons[i].show()
+		buttons[i].disabled = false
+
+
+func animate_choices_in() -> void:
+	var buttons = [choice_button_1, choice_button_2, choice_button_3]
+
+	for i in range(min(available_choices.size(), 3)):
+		var button = buttons[i]
+		button.modulate.a = 0.0
+		button.show()
+		var tween = create_tween()
+		tween.tween_interval(i * CHOICE_STAGGER)
+		tween.tween_property(button, "modulate:a", 1.0, CHOICE_FADE_TIME)
+
+
+func set_choice_input_enabled(enabled: bool) -> void:
+	var buttons = [choice_button_1, choice_button_2, choice_button_3]
+	for i in range(buttons.size()):
+		buttons[i].disabled = not enabled or i >= available_choices.size()
+
+
+func is_night_background(texture: Texture2D) -> bool:
+	return texture in [
+		home_village_burning_night_texture,
+		manor_exterior_night_texture,
+		manor_interior_night_texture,
+		village_fire_night_texture
+	]
+
+
+func transition_to_event(event_id: String) -> void:
+	if not chapter_data["events"].has(event_id):
+		print("ERROR: Событие не найдено: ", event_id)
+		return
+
+	is_transitioning = true
+	set_choice_input_enabled(false)
+	skills_button.disabled = true
+	menu_button.disabled = true
+
+	var next_background = get_background_texture(event_id)
+	var background_changes = next_background != background.texture
+	var old_character = character_portrait.texture if character_portrait.visible else null
+	var next_character = get_character_texture(event_id)
+	var character_changes = old_character != next_character
+
+	# Текст и персонаж сначала мягко уходят.
+	var out_tween = create_tween().set_parallel(true)
+	out_tween.tween_property(event_text, "modulate:a", 0.0, TEXT_FADE_TIME)
+	if character_portrait.visible and character_changes:
+		out_tween.tween_property(character_portrait, "modulate:a", 0.0, CHARACTER_FADE_TIME)
+
+	if background_changes:
+		var fade_out_time = LOCATION_FADE_NIGHT if is_night_background(background.texture) or is_night_background(next_background) else LOCATION_FADE_OUT
+		out_tween.tween_property(background, "modulate:a", 0.0, fade_out_time)
+
+	await out_tween.finished
+
+	current_event_id = event_id
+	GameState.current_event_id = event_id
+	var event = chapter_data["events"][event_id]
+	event_text.text = event["text"]
+	rebuild_choices(event["choices"])
+
+	if background_changes:
+		background.texture = next_background
+		background.visible = next_background != null
+		background.scale = Vector2.ONE
+		start_background_motion()
+
+	if character_changes:
+		character_portrait.texture = next_character
+		character_portrait.visible = next_character != null
+		character_portrait.position = character_base_position + Vector2(0, CHARACTER_RISE_PX)
+	else:
+		character_portrait.visible = next_character != null
+
+	event_text.modulate.a = 0.0
+	if character_portrait.visible:
+		character_portrait.modulate.a = 0.0 if character_changes else 1.0
+
+	# Микропауза между старой и новой сценой.
+	await get_tree().create_timer(0.08).timeout
+
+	var in_tween = create_tween().set_parallel(true)
+	in_tween.tween_property(event_text, "modulate:a", 1.0, TEXT_FADE_TIME)
+	if background_changes and background.visible:
+		var fade_in_time = LOCATION_FADE_NIGHT if is_night_background(next_background) else LOCATION_FADE_IN
+		in_tween.tween_property(background, "modulate:a", 1.0, fade_in_time)
+	if character_portrait.visible and character_changes:
+		in_tween.tween_property(character_portrait, "modulate:a", 1.0, CHARACTER_FADE_TIME)
+		in_tween.tween_property(character_portrait, "position", character_base_position, CHARACTER_FADE_TIME)
+
+	animate_choices_in()
+
+	# Кнопки неактивны минимум 0.65 сек после выбора — быстрый спам
+	# не может запустить второй переход поверх первого.
+	await get_tree().create_timer(INPUT_LOCK_TIME).timeout
+	set_choice_input_enabled(true)
+	skills_button.disabled = false
+	menu_button.disabled = false
+	is_transitioning = false
+
+
+func start_background_motion() -> void:
+	if background_motion_tween != null and background_motion_tween.is_valid():
+		background_motion_tween.kill()
+
+	if not background.visible or background.texture == null:
+		return
+
+	background.scale = Vector2.ONE
+	background.pivot_offset = background.size / 2.0
+	background_motion_tween = create_tween()
+	background_motion_tween.set_loops()
+	background_motion_tween.tween_property(
+		background,
+		"scale",
+		Vector2(BACKGROUND_ZOOM_SCALE, BACKGROUND_ZOOM_SCALE),
+		BACKGROUND_ZOOM_TIME
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	background_motion_tween.tween_property(
+		background,
+		"scale",
+		Vector2.ONE,
+		BACKGROUND_ZOOM_TIME
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func get_character_texture(event_id: String) -> Texture2D:
+	match event_id:
+		"boy_encounter":
+			return boy_pleading_texture
+		"boy_helped", "boy_return_positive", "boy_lockpicking_learned", "boy_lockpicking_refused":
+			return boy_friendly_texture
+		"boy_ignored", "boy_return_negative":
+			return boy_angry_texture
+		"thief_encounter":
+			return thief_neutral_texture
+		"thief_silent", "bandit_thief_positive", "bandit_thief_join", "bandit_thief_training", "bandit_thief_refuse", "bandit_thief_refuse_training", "bandit_thief_leave":
+			return thief_friendly_texture
+		"thief_nosy", "bandit_thief_negative", "bandit_thief_driven_away":
+			return thief_angry_texture
+		"fortune_teller", "fortune_teller_accept", "fortune_teller_refuse":
+			return fortune_teller_texture
+		"post_cart", "guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
+			return guard_texture
+		"village_arrival", "bread_theft_failed", "bread_ask_failed":
+			return peasant_grumpy_texture
+		"post_fortune", "village_cart_help", "village_cart_leave":
+			return peasant_pleading_texture
+		_:
+			return null
 
 
 func update_character_portrait(event_id: String) -> void:
+	var texture = get_character_texture(event_id)
+	character_portrait.texture = texture
+	character_portrait.visible = texture != null
+	character_portrait.modulate.a = 1.0
+	character_portrait.position = character_base_position
+
+
+func get_background_texture(event_id: String) -> Texture2D:
 	match event_id:
-		"boy_encounter":
-			character_portrait.texture = boy_pleading_texture
-			character_portrait.show()
-		"boy_helped", "boy_return_positive", "boy_lockpicking_learned", "boy_lockpicking_refused":
-			character_portrait.texture = boy_friendly_texture
-			character_portrait.show()
-		"boy_ignored", "boy_return_negative":
-			character_portrait.texture = boy_angry_texture
-			character_portrait.show()
-		"thief_encounter":
-			character_portrait.texture = thief_neutral_texture
-			character_portrait.show()
-		"thief_silent", "bandit_thief_positive", "bandit_thief_join", "bandit_thief_training", "bandit_thief_refuse", "bandit_thief_refuse_training", "bandit_thief_leave":
-			character_portrait.texture = thief_friendly_texture
-			character_portrait.show()
-		"thief_nosy", "bandit_thief_negative", "bandit_thief_driven_away":
-			character_portrait.texture = thief_angry_texture
-			character_portrait.show()
-		"fortune_teller", "fortune_teller_accept", "fortune_teller_refuse":
-			character_portrait.texture = fortune_teller_texture
-			character_portrait.show()
-		"post_cart", "guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
-			character_portrait.texture = guard_texture
-			character_portrait.show()
-		"village_arrival", "bread_theft_failed", "bread_ask_failed":
-			character_portrait.texture = peasant_grumpy_texture
-			character_portrait.show()
-		"post_fortune", "village_cart_help", "village_cart_leave":
-			character_portrait.texture = peasant_pleading_texture
-			character_portrait.show()
+		"prologue_home":
+			return home_village_day_texture
+		"prologue_forge":
+			return home_forge_day_texture
+		"prologue_raid":
+			return home_village_burning_night_texture
+		"prologue_meadow":
+			return forest_escape_dawn_texture
+		"meadow_start", "meadow_path", "meadow_cross":
+			return meadow_morning_texture
+		"crossroads":
+			return crossroads_morning_texture
+		"thief_encounter", "thief_silent", "thief_nosy":
+			return forest_path_day_texture
+		"boy_encounter", "boy_helped", "boy_ignored":
+			return new_village_outskirts_day_texture
+		"village_arrival", "bread_theft_failed", "bread_ask_failed", "village_square", "village_square_market":
+			return village_market_day_texture
+		"leper_encounter", "leper_help", "leper_rejected":
+			return village_street_day_texture
+		"village_square_forge":
+			return village_forge_day_texture
+		"village_well", "village_well_listen", "village_well_leave":
+			return village_well_day_texture
+		"boy_return_positive", "boy_lockpicking_learned", "boy_lockpicking_refused", "boy_return_negative":
+			return village_barn_alley_day_texture
+		"bandit_route", "bandit_thief_positive", "bandit_thief_join", "bandit_thief_training", "bandit_thief_refuse", "bandit_thief_refuse_training", "bandit_thief_leave", "bandit_thief_negative", "bandit_thief_driven_away", "bandit_boy_skilled", "bandit_boy_join", "bandit_boy_refuse", "bandit_boy_unskilled", "bandit_boy_unskilled_leave":
+			return bandit_hideout_evening_texture
+		"robbery_start", "robbery_locked_door", "robbery_lock_opened", "robbery_escape_door", "robbery_escape_window", "robbery_escape":
+			return manor_exterior_night_texture
+		"robbery_inside", "robbery_owner":
+			return manor_interior_night_texture
+		"morning_start", "morning_after_robbery", "morning_normal", "morning_village", "morning_rumors_participant", "morning_rumors_outsider", "morning_rumors_leave", "fortune_teller", "fortune_teller_accept", "fortune_teller_refuse", "post_fortune", "village_cart_help", "village_cart_leave", "post_cart", "guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
+			return village_dawn_texture
+		"mill_after_crackdown", "mill_after_escape", "mill_after_lie":
+			return old_mill_evening_texture
+		"old_mill":
+			return old_mill_interior_sunset_texture
+		"mill_night_wakeup", "village_night_approach", "village_night_thieves", "final_choice_robber", "final_choice_outsider", "chapter_end_bandits", "chapter_end_village":
+			return village_fire_night_texture
 		_:
-			character_portrait.hide()
+			return null
 
 
 func update_background(event_id: String) -> void:
-	match event_id:
-		"prologue_home":
-			background.texture = home_village_day_texture
-			background.show()
-		"prologue_forge":
-			background.texture = home_forge_day_texture
-			background.show()
-		"prologue_raid":
-			background.texture = home_village_burning_night_texture
-			background.show()
-		"prologue_meadow":
-			background.texture = forest_escape_dawn_texture
-			background.show()
-		"meadow_start", "meadow_path", "meadow_cross":
-			background.texture = meadow_morning_texture
-			background.show()
-		"crossroads":
-			background.texture = crossroads_morning_texture
-			background.show()
-		"thief_encounter", "thief_silent", "thief_nosy":
-			background.texture = forest_path_day_texture
-			background.show()
-		"boy_encounter", "boy_helped", "boy_ignored":
-			background.texture = new_village_outskirts_day_texture
-			background.show()
-		"village_arrival", "bread_theft_failed", "bread_ask_failed", "village_square", "village_square_market":
-			background.texture = village_market_day_texture
-			background.show()
-		"leper_encounter", "leper_help", "leper_rejected":
-			background.texture = village_street_day_texture
-			background.show()
-		"village_square_forge":
-			background.texture = village_forge_day_texture
-			background.show()
-		"village_well", "village_well_listen", "village_well_leave":
-			background.texture = village_well_day_texture
-			background.show()
-		"boy_return_positive", "boy_lockpicking_learned", "boy_lockpicking_refused", "boy_return_negative":
-			background.texture = village_barn_alley_day_texture
-			background.show()
-		"bandit_route", "bandit_thief_positive", "bandit_thief_join", "bandit_thief_training", "bandit_thief_refuse", "bandit_thief_refuse_training", "bandit_thief_leave", "bandit_thief_negative", "bandit_thief_driven_away", "bandit_boy_skilled", "bandit_boy_join", "bandit_boy_refuse", "bandit_boy_unskilled", "bandit_boy_unskilled_leave":
-			background.texture = bandit_hideout_evening_texture
-			background.show()
-		"robbery_start", "robbery_locked_door", "robbery_lock_opened", "robbery_escape_door", "robbery_escape_window", "robbery_escape":
-			background.texture = manor_exterior_night_texture
-			background.show()
-		"robbery_inside", "robbery_owner":
-			background.texture = manor_interior_night_texture
-			background.show()
-		"morning_start", "morning_after_robbery", "morning_normal", "morning_village", "morning_rumors_participant", "morning_rumors_outsider", "morning_rumors_leave", "fortune_teller", "fortune_teller_accept", "fortune_teller_refuse", "post_fortune", "village_cart_help", "village_cart_leave", "post_cart", "guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
-			background.texture = village_dawn_texture
-			background.show()
-		"mill_after_crackdown", "mill_after_escape", "mill_after_lie":
-			background.texture = old_mill_evening_texture
-			background.show()
-		"old_mill":
-			background.texture = old_mill_interior_sunset_texture
-			background.show()
-		"mill_night_wakeup", "village_night_approach", "village_night_thieves", "final_choice_robber", "final_choice_outsider", "chapter_end_bandits", "chapter_end_village":
-			background.texture = village_fire_night_texture
-			background.show()
-		_:
-			# Для остальных событий фон будет добавляться по мере готовности арта.
-			background.hide()
+	var texture = get_background_texture(event_id)
+	background.texture = texture
+	background.visible = texture != null
+	background.modulate.a = 1.0
+	start_background_motion()
 
 
 func check_conditions(choice: Dictionary) -> bool:
@@ -317,28 +455,30 @@ func check_conditions(choice: Dictionary) -> bool:
 
 
 func choose(choice_index: int) -> void:
-	if choice_index >= available_choices.size():
+	if is_transitioning or choice_index >= available_choices.size():
 		return
+
+	is_transitioning = true
+	set_choice_input_enabled(false)
 
 	var selected_choice = available_choices[choice_index]
 
-	# Сначала применяем последствия выбора.
 	if selected_choice.has("effects"):
 		apply_effects(selected_choice["effects"])
 
-	# Затем переходим к следующему событию.
 	if selected_choice.has("next"):
 		var next_event_id = str(selected_choice["next"])
 
 		if chapter_data["events"].has(next_event_id):
-			show_event(next_event_id)
-
-			# Сохраняем уже ПОСЛЕ перехода.
-			# Поэтому Continue вернёт игрока к новому событию,
-			# а не заставит повторять предыдущий выбор.
+			await transition_to_event(next_event_id)
 			SaveSystem.save_game()
 		else:
+			is_transitioning = false
+			set_choice_input_enabled(true)
 			print("ERROR: Следующее событие не найдено: ", next_event_id)
+	else:
+		is_transitioning = false
+		set_choice_input_enabled(true)
 
 
 func apply_effects(effects: Dictionary) -> void:
@@ -391,18 +531,18 @@ func _on_choice_button_3_pressed() -> void:
 
 
 func _on_skills_button_pressed() -> void:
-	if game_menu_panel.visible or skills_panel.visible:
+	if is_transitioning or game_menu_panel.visible or skills_panel.visible:
 		return
 
 	refresh_skills_panel()
 	skills_button.disabled = true
 	menu_button.disabled = true
 	skills_modal_blocker.show()
-	skills_panel.show()
+	animate_panel_open(skills_panel)
 
 
 func _on_skills_close_button_pressed() -> void:
-	skills_panel.hide()
+	await animate_panel_close(skills_panel)
 	skills_modal_blocker.hide()
 	skills_button.disabled = false
 	menu_button.disabled = false
@@ -449,20 +589,39 @@ func _on_skill_icon_pressed(skill_id: String) -> void:
 			skill_description.text = ""
 
 func _on_menu_button_pressed() -> void:
-	if skills_panel.visible or game_menu_panel.visible:
+	if is_transitioning or skills_panel.visible or game_menu_panel.visible:
 		return
 
 	skills_button.disabled = true
 	menu_button.disabled = true
 	menu_modal_blocker.show()
-	game_menu_panel.show()
+	animate_panel_open(game_menu_panel)
 
 
 func _on_menu_continue_button_pressed() -> void:
-	game_menu_panel.hide()
+	await animate_panel_close(game_menu_panel)
 	menu_modal_blocker.hide()
 	skills_button.disabled = false
 	menu_button.disabled = false
+
+
+func animate_panel_open(panel: Control) -> void:
+	panel.scale = Vector2(0.95, 0.95)
+	panel.modulate.a = 0.0
+	panel.show()
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(panel, "scale", Vector2.ONE, PANEL_ANIMATION_TIME).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(panel, "modulate:a", 1.0, PANEL_ANIMATION_TIME)
+
+
+func animate_panel_close(panel: Control) -> void:
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(panel, "scale", Vector2(0.95, 0.95), PANEL_ANIMATION_TIME).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(panel, "modulate:a", 0.0, PANEL_ANIMATION_TIME)
+	await tween.finished
+	panel.hide()
+	panel.scale = Vector2.ONE
+	panel.modulate.a = 1.0
 
 
 func _on_menu_settings_button_pressed() -> void:
@@ -478,7 +637,31 @@ func _on_menu_exit_button_pressed() -> void:
 
 
 func _on_health_changed(current_health: int, max_health: int) -> void:
+	var previous_health = 0
+	for heart in hp_hearts:
+		if heart.texture == hp_full_texture:
+			previous_health += 1
+
 	update_health_display(current_health, max_health)
+
+	if current_health == previous_health:
+		return
+
+	var changed_index = current_health if current_health < previous_health else current_health - 1
+	if changed_index < 0 or changed_index >= hp_hearts.size():
+		return
+
+	var heart = hp_hearts[changed_index]
+	heart.pivot_offset = heart.size / 2.0
+	heart.scale = Vector2.ONE
+
+	var tween = create_tween()
+	if current_health < previous_health:
+		tween.tween_property(heart, "scale", Vector2(0.78, 0.78), HP_PULSE_TIME)
+		tween.tween_property(heart, "scale", Vector2.ONE, HP_PULSE_TIME)
+	else:
+		tween.tween_property(heart, "scale", Vector2(1.18, 1.18), HP_PULSE_TIME)
+		tween.tween_property(heart, "scale", Vector2.ONE, HP_PULSE_TIME)
 
 
 func update_health_display(current_health: int, max_health: int) -> void:
