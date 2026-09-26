@@ -6,13 +6,13 @@ extends Control
 @onready var exit_button = $CenterContainer/VBoxContainer/ExitButton
 @onready var fade_overlay = $FadeOverlay
 @onready var loading_overlay = $LoadingOverlay
-@onready var loading_label = $LoadingOverlay/LoadingLabel
 
 const MENU_FADE_IN_TIME := 0.45
 const BUTTON_FADE_TIME := 0.28
 const BUTTON_STAGGER := 0.09
 const MENU_FADE_OUT_TIME := 0.25
 const SCREEN_FADE_OUT_TIME := 0.25
+const LOADING_FADE_IN_TIME := 0.35
 const GAME_SCENE_PATH := "res://scenes/chapter_one.tscn"
 
 var is_transitioning := false
@@ -77,8 +77,12 @@ func transition_to_game() -> void:
 
 	# Отдельный экран загрузки остаётся отрисованным, пока тяжёлая игровая
 	# сцена загружается в фоне. Серый viewport между сценами не показывается.
+	loading_overlay.modulate.a = 0.0
 	loading_overlay.show()
 	loading_overlay.move_to_front()
+	var loading_tween = create_tween()
+	loading_tween.tween_property(loading_overlay, "modulate:a", 1.0, LOADING_FADE_IN_TIME)
+	await loading_tween.finished
 	fade_overlay.hide()
 
 	var request_error = ResourceLoader.load_threaded_request(GAME_SCENE_PATH)
@@ -88,9 +92,6 @@ func transition_to_game() -> void:
 		return
 
 	var progress: Array = []
-	# Текст оставляем фиксированным. Раньше точки менялись каждый кадр,
-	# из-за чего ширина строки постоянно менялась и надпись визуально дёргалась.
-	loading_label.text = "Загрузка..."
 	while true:
 		var status = ResourceLoader.load_threaded_get_status(GAME_SCENE_PATH, progress)
 
