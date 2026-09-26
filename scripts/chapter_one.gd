@@ -1,6 +1,7 @@
 extends Control
 
 @onready var background = $Background
+@onready var background_transition = $BackgroundTransition
 @onready var character_portrait = $CharacterPortrait
 @onready var event_text = $StoryArea/EventText
 @onready var choice_button_1 = $ChoiceButton1
@@ -70,8 +71,8 @@ const LOCATION_FADE_OUT := 0.24
 const LOCATION_FADE_IN := 0.32
 const LOCATION_FADE_NIGHT := 0.40
 const CHARACTER_FADE_TIME := 0.35
-const CHOICE_FADE_TIME := 0.22
-const CHOICE_STAGGER := 0.07
+const CHOICE_FADE_TIME := 0.264
+const CHOICE_STAGGER := 0.084
 const PANEL_ANIMATION_TIME := 0.20
 const HP_PULSE_TIME := 0.12
 
@@ -80,6 +81,9 @@ var character_base_position := Vector2.ZERO
 
 
 func _ready() -> void:
+	# Фиксируем исходную позицию портрета ДО первой загрузки события.
+	# Иначе первое show_event() успевало записать Vector2.ZERO и уводило всех NPC влево-вверх.
+	character_base_position = character_portrait.position
 	load_chapter_data()
 
 	GameState.health_changed.connect(_on_health_changed)
@@ -95,7 +99,6 @@ func _ready() -> void:
 	menu_settings_button.pressed.connect(_on_menu_settings_button_pressed)
 	menu_exit_button.pressed.connect(_on_menu_exit_button_pressed)
 
-	character_base_position = character_portrait.position
 	skills_panel.pivot_offset = skills_panel.size / 2.0
 	game_menu_panel.pivot_offset = game_menu_panel.size / 2.0
 
@@ -242,12 +245,29 @@ func transition_to_event(event_id: String) -> void:
 	event_text.text = event["text"]
 	rebuild_choices(event["choices"])
 
-	# Фон меняем без ухода в прозрачность. Старый фон остаётся видимым
-	# до самого момента подмены, поэтому серый viewport больше не показывается.
+	# Настоящий crossfade через второй полноэкранный слой:
+	# старый фон остаётся непрозрачным, новый проявляется поверх него.
 	if background_changes:
-		background.texture = next_background
-		background.visible = next_background != null
-	background.modulate.a = 1.0
+		if next_background != null:
+			background_transition.texture = next_background
+			background_transition.modulate.a = 0.0
+			background_transition.show()
+
+			var fade_time = LOCATION_FADE_NIGHT if is_night_background(background.texture) or is_night_background(next_background) else LOCATION_FADE_IN
+			var background_tween = create_tween()
+			background_tween.tween_property(background_transition, "modulate:a", 1.0, fade_time)
+			await background_tween.finished
+
+			background.texture = next_background
+			background.show()
+			background.modulate.a = 1.0
+			background_transition.hide()
+			background_transition.texture = null
+			background_transition.modulate.a = 1.0
+		else:
+			background.hide()
+			background_transition.hide()
+			background_transition.texture = null
 	background.scale = Vector2.ONE
 
 	# Персонаж всегда остаётся в зафиксированных координатах.
