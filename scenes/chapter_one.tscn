@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=29 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
@@ -22,6 +22,9 @@
 [ext_resource type="Texture2D" path="res://assets/ui/boy_pleading.png" id="20_boy_pleading"]
 [ext_resource type="Texture2D" path="res://assets/ui/boy_friendly.png" id="21_boy_friendly"]
 [ext_resource type="Texture2D" path="res://assets/ui/boy_angry.png" id="22_boy_angry"]
+[ext_resource type="Texture2D" path="res://assets/ui/thief_neutral.png" id="23_thief_neutral"]
+[ext_resource type="Texture2D" path="res://assets/ui/thief_angry.png" id="24_thief_angry"]
+[ext_resource type="Texture2D" path="res://assets/ui/thief_friendly.png" id="25_thief_friendly"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
