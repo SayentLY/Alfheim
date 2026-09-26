@@ -70,16 +70,12 @@ const LOCATION_FADE_OUT := 0.24
 const LOCATION_FADE_IN := 0.32
 const LOCATION_FADE_NIGHT := 0.40
 const CHARACTER_FADE_TIME := 0.35
-const CHARACTER_RISE_PX := 20.0
 const CHOICE_FADE_TIME := 0.22
 const CHOICE_STAGGER := 0.07
 const PANEL_ANIMATION_TIME := 0.20
-const BACKGROUND_ZOOM_TIME := 20.0
-const BACKGROUND_ZOOM_SCALE := 1.03
 const HP_PULSE_TIME := 0.12
 
 var is_transitioning := false
-var background_motion_tween: Tween
 var character_base_position := Vector2.ZERO
 
 
@@ -100,10 +96,8 @@ func _ready() -> void:
 	menu_exit_button.pressed.connect(_on_menu_exit_button_pressed)
 
 	character_base_position = character_portrait.position
-	background.pivot_offset = background.size / 2.0
 	skills_panel.pivot_offset = skills_panel.size / 2.0
 	game_menu_panel.pivot_offset = game_menu_panel.size / 2.0
-	start_background_motion()
 
 
 func load_chapter_data() -> void:
@@ -194,6 +188,8 @@ func animate_choices_in() -> void:
 	for i in range(min(available_choices.size(), 3)):
 		var button = buttons[i]
 		button.modulate.a = 0.0
+		button.disabled = false
+		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.show()
 		var tween = create_tween()
 		tween.tween_interval(i * CHOICE_STAGGER)
@@ -203,7 +199,9 @@ func animate_choices_in() -> void:
 func set_choice_input_enabled(enabled: bool) -> void:
 	var buttons = [choice_button_1, choice_button_2, choice_button_3]
 	for i in range(buttons.size()):
-		buttons[i].disabled = not enabled or i >= available_choices.size()
+		var is_available = i < available_choices.size()
+		buttons[i].disabled = false
+		buttons[i].mouse_filter = Control.MOUSE_FILTER_STOP if enabled and is_available else Control.MOUSE_FILTER_IGNORE
 
 
 func is_night_background(texture: Texture2D) -> bool:
@@ -231,16 +229,11 @@ func transition_to_event(event_id: String) -> void:
 	var next_character = get_character_texture(event_id)
 	var character_changes = old_character != next_character
 
-	# Текст и персонаж сначала мягко уходят.
+	# Убираем текст и, если нужно, старого персонажа.
 	var out_tween = create_tween().set_parallel(true)
 	out_tween.tween_property(event_text, "modulate:a", 0.0, TEXT_FADE_TIME)
 	if character_portrait.visible and character_changes:
 		out_tween.tween_property(character_portrait, "modulate:a", 0.0, CHARACTER_FADE_TIME)
-
-	if background_changes:
-		var fade_out_time = LOCATION_FADE_NIGHT if is_night_background(background.texture) or is_night_background(next_background) else LOCATION_FADE_OUT
-		out_tween.tween_property(background, "modulate:a", 0.0, fade_out_time)
-
 	await out_tween.finished
 
 	current_event_id = event_id
@@ -249,69 +242,37 @@ func transition_to_event(event_id: String) -> void:
 	event_text.text = event["text"]
 	rebuild_choices(event["choices"])
 
+	# Фон меняем без ухода в прозрачность. Старый фон остаётся видимым
+	# до самого момента подмены, поэтому серый viewport больше не показывается.
 	if background_changes:
 		background.texture = next_background
 		background.visible = next_background != null
-		background.scale = Vector2.ONE
-		start_background_motion()
+	background.modulate.a = 1.0
+	background.scale = Vector2.ONE
 
+	# Персонаж всегда остаётся в зафиксированных координатах.
 	if character_changes:
 		character_portrait.texture = next_character
 		character_portrait.visible = next_character != null
-		character_portrait.position = character_base_position + Vector2(0, CHARACTER_RISE_PX)
-	else:
-		character_portrait.visible = next_character != null
-
-	event_text.modulate.a = 0.0
+	character_portrait.position = character_base_position
 	if character_portrait.visible:
 		character_portrait.modulate.a = 0.0 if character_changes else 1.0
 
-	# Микропауза между старой и новой сценой.
+	event_text.modulate.a = 0.0
 	await get_tree().create_timer(0.08).timeout
 
 	var in_tween = create_tween().set_parallel(true)
 	in_tween.tween_property(event_text, "modulate:a", 1.0, TEXT_FADE_TIME)
-	if background_changes and background.visible:
-		var fade_in_time = LOCATION_FADE_NIGHT if is_night_background(next_background) else LOCATION_FADE_IN
-		in_tween.tween_property(background, "modulate:a", 1.0, fade_in_time)
 	if character_portrait.visible and character_changes:
 		in_tween.tween_property(character_portrait, "modulate:a", 1.0, CHARACTER_FADE_TIME)
-		in_tween.tween_property(character_portrait, "position", character_base_position, CHARACTER_FADE_TIME)
 
 	animate_choices_in()
 
-	# Кнопки неактивны минимум 0.65 сек после выбора — быстрый спам
-	# не может запустить второй переход поверх первого.
 	await get_tree().create_timer(INPUT_LOCK_TIME).timeout
 	set_choice_input_enabled(true)
 	skills_button.disabled = false
 	menu_button.disabled = false
 	is_transitioning = false
-
-
-func start_background_motion() -> void:
-	if background_motion_tween != null and background_motion_tween.is_valid():
-		background_motion_tween.kill()
-
-	if not background.visible or background.texture == null:
-		return
-
-	background.scale = Vector2.ONE
-	background.pivot_offset = background.size / 2.0
-	background_motion_tween = create_tween()
-	background_motion_tween.set_loops()
-	background_motion_tween.tween_property(
-		background,
-		"scale",
-		Vector2(BACKGROUND_ZOOM_SCALE, BACKGROUND_ZOOM_SCALE),
-		BACKGROUND_ZOOM_TIME
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	background_motion_tween.tween_property(
-		background,
-		"scale",
-		Vector2.ONE,
-		BACKGROUND_ZOOM_TIME
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func get_character_texture(event_id: String) -> Texture2D:
@@ -399,7 +360,7 @@ func update_background(event_id: String) -> void:
 	background.texture = texture
 	background.visible = texture != null
 	background.modulate.a = 1.0
-	start_background_motion()
+	background.scale = Vector2.ONE
 
 
 func check_conditions(choice: Dictionary) -> bool:
