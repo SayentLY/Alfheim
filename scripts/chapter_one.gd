@@ -39,6 +39,10 @@ var village_barn_alley_day_texture: Texture2D = preload("res://assets/ui/village
 var bandit_hideout_evening_texture: Texture2D = preload("res://assets/ui/bandit_hideout_evening.png")
 var manor_exterior_night_texture: Texture2D = preload("res://assets/ui/manor_exterior_night.png")
 var manor_interior_night_texture: Texture2D = preload("res://assets/ui/manor_interior_night.png")
+var village_dawn_texture: Texture2D = preload("res://assets/ui/village_dawn.png")
+var old_mill_evening_texture: Texture2D = preload("res://assets/ui/old_mill_evening.png")
+var old_mill_interior_sunset_texture: Texture2D = preload("res://assets/ui/old_mill_interior_sunset.png")
+var village_fire_night_texture: Texture2D = preload("res://assets/ui/village_fire_night.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -194,6 +198,18 @@ func update_background(event_id: String) -> void:
 			background.show()
 		"robbery_inside", "robbery_owner":
 			background.texture = manor_interior_night_texture
+			background.show()
+		"morning_start", "morning_after_robbery", "morning_normal", "morning_village", "morning_rumors_participant", "morning_rumors_outsider", "morning_rumors_leave", "fortune_teller", "fortune_teller_accept", "fortune_teller_refuse", "post_fortune", "village_cart_help", "village_cart_leave", "post_cart", "guard_questions_robber", "guard_arrest_escape", "guard_questions_innocent", "guard_crackdown", "guard_escape", "guard_lie", "guard_lie_leave":
+			background.texture = village_dawn_texture
+			background.show()
+		"mill_after_crackdown", "mill_after_escape", "mill_after_lie":
+			background.texture = old_mill_evening_texture
+			background.show()
+		"old_mill":
+			background.texture = old_mill_interior_sunset_texture
+			background.show()
+		"mill_night_wakeup", "village_night_approach", "village_night_thieves", "final_choice_robber", "final_choice_outsider", "chapter_end_bandits", "chapter_end_village":
+			background.texture = village_fire_night_texture
 			background.show()
 		_:
 			# Для остальных событий фон будет добавляться по мере готовности арта.
