@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://db33shn125ax6"]
+[gd_scene load_steps=24 format=3 uid="uid://db33shn125ax6"]
 
 [ext_resource type="Script" uid="uid://bto1dy3eovdo6" path="res://scripts/chapter_one.gd" id="1_8jvkd"]
 [ext_resource type="Texture2D" path="res://assets/ui/story_panel.png" id="2_story"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" path="res://assets/ui/home_village_day.png" id="17_home_village_day"]
 [ext_resource type="Texture2D" path="res://assets/ui/home_forge_day.png" id="18_home_forge_day"]
 [ext_resource type="Texture2D" path="res://assets/ui/home_village_burning_night.png" id="19_home_village_burning_night"]
+[ext_resource type="Texture2D" path="res://assets/ui/boy_pleading.png" id="20_boy_pleading"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_choice_normal"]
 texture = ExtResource("3_choice_normal")
@@ -76,6 +77,18 @@ mouse_filter = 2
 texture = ExtResource("17_home_village_day")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="CharacterPortrait" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 340.0
+offset_top = 300.0
+offset_right = 740.0
+offset_bottom = 700.0
+mouse_filter = 2
+texture = ExtResource("20_boy_pleading")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="StoryArea" type="Control" parent="."]
 layout_mode = 0
