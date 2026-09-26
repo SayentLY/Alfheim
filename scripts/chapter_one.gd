@@ -44,6 +44,9 @@ var village_dawn_texture: Texture2D = preload("res://assets/ui/village_dawn.png"
 var old_mill_evening_texture: Texture2D = preload("res://assets/ui/old_mill_evening.png")
 var old_mill_interior_sunset_texture: Texture2D = preload("res://assets/ui/old_mill_interior_sunset.png")
 var village_fire_night_texture: Texture2D = preload("res://assets/ui/village_fire_night.png")
+var boy_pleading_texture: Texture2D = preload("res://assets/ui/boy_pleading.png")
+var boy_friendly_texture: Texture2D = preload("res://assets/ui/boy_friendly.png")
+var boy_angry_texture: Texture2D = preload("res://assets/ui/boy_angry.png")
 
 var chapter_data: Dictionary
 var current_event_id: String
@@ -154,6 +157,13 @@ func show_event(event_id: String) -> void:
 func update_character_portrait(event_id: String) -> void:
 	match event_id:
 		"boy_encounter":
+			character_portrait.texture = boy_pleading_texture
+			character_portrait.show()
+		"boy_helped", "boy_return_positive", "boy_lockpicking_learned", "boy_lockpicking_refused":
+			character_portrait.texture = boy_friendly_texture
+			character_portrait.show()
+		"boy_ignored", "boy_return_negative":
+			character_portrait.texture = boy_angry_texture
 			character_portrait.show()
 		_:
 			character_portrait.hide()
