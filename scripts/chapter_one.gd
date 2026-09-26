@@ -2,6 +2,7 @@ extends Control
 
 @onready var background = $Background
 @onready var background_transition = $BackgroundTransition
+@onready var scene_fade_overlay = $SceneFadeOverlay
 @onready var character_portrait = $CharacterPortrait
 @onready var event_text = $StoryArea/EventText
 @onready var choice_button_1 = $ChoiceButton1
@@ -75,6 +76,7 @@ const CHOICE_FADE_TIME := 0.264
 const CHOICE_STAGGER := 0.084
 const PANEL_ANIMATION_TIME := 0.20
 const HP_PULSE_TIME := 0.12
+const SCENE_FADE_IN_TIME := 0.45
 
 var is_transitioning := false
 var character_base_position := Vector2.ZERO
@@ -101,6 +103,16 @@ func _ready() -> void:
 
 	skills_panel.pivot_offset = skills_panel.size / 2.0
 	game_menu_panel.pivot_offset = game_menu_panel.size / 2.0
+
+	# Новая сцена уже полностью собрана под чёрным слоем.
+	# Поэтому игрок не видит промежуточный серый viewport при загрузке.
+	scene_fade_overlay.modulate.a = 1.0
+	scene_fade_overlay.show()
+	scene_fade_overlay.move_to_front()
+	var entrance_tween = create_tween()
+	entrance_tween.tween_property(scene_fade_overlay, "modulate:a", 0.0, SCENE_FADE_IN_TIME)
+	await entrance_tween.finished
+	scene_fade_overlay.hide()
 
 
 func load_chapter_data() -> void:
