@@ -88,7 +88,9 @@ func transition_to_game() -> void:
 		return
 
 	var progress: Array = []
-	var dot_step := 0
+	# Текст оставляем фиксированным. Раньше точки менялись каждый кадр,
+	# из-за чего ширина строки постоянно менялась и надпись визуально дёргалась.
+	loading_label.text = "Загрузка..."
 	while true:
 		var status = ResourceLoader.load_threaded_get_status(GAME_SCENE_PATH, progress)
 
@@ -99,8 +101,6 @@ func transition_to_game() -> void:
 			is_transitioning = false
 			return
 
-		dot_step = (dot_step + 1) % 4
-		loading_label.text = "Загрузка" + ".".repeat(dot_step)
 		await get_tree().process_frame
 
 	var packed_scene = ResourceLoader.load_threaded_get(GAME_SCENE_PATH) as PackedScene
