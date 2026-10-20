@@ -155,7 +155,7 @@ func get_music_state(event_id: String) -> String:
 	if event_id in ["prologue_home", "prologue_forge"]:
 		return "home"
 	if event_id == "prologue_raid":
-		return "silence"
+		return "danger"
 	if event_id in [
 		"prologue_meadow", "meadow_start", "meadow_path", "meadow_cross",
 		"crossroads", "thief_encounter", "thief_silent", "thief_nosy"
