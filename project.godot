@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameState="*uid://dejbcl4i4bdqs"
 SaveSystem="*uid://dl4ne5s5idn13"
+AudioManager="*res://scripts/audio_manager.gd"
 
 [display]
 
