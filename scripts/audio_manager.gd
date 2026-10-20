@@ -2,6 +2,7 @@ extends Node
 
 const MUSIC_FADE_TIME := 0.8
 const HOME_TRACK: AudioStream = preload("res://assets/audio/music/home.mp3")
+const FOREST_TRACK: AudioStream = preload("res://assets/audio/music/forest.mp3")
 
 var current_state := ""
 var active_player: AudioStreamPlayer
@@ -26,6 +27,8 @@ func play_music(state: String) -> void:
 	match state:
 		"home":
 			track = HOME_TRACK
+		"forest":
+			track = FOREST_TRACK
 
 	if transition_tween != null and transition_tween.is_running():
 		transition_tween.kill()
