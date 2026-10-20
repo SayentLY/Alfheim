@@ -151,6 +151,12 @@ func load_chapter_data() -> void:
 	show_event(current_event_id)
 
 
+func get_music_state(event_id: String) -> String:
+	if event_id in ["prologue_home", "prologue_forge"]:
+		return "home"
+	return "silence"
+
+
 func show_event(event_id: String) -> void:
 	if not chapter_data["events"].has(event_id):
 		print("ERROR: Событие не найдено: ", event_id)
@@ -158,6 +164,7 @@ func show_event(event_id: String) -> void:
 
 	current_event_id = event_id
 	GameState.current_event_id = event_id
+	AudioManager.play_music(get_music_state(event_id))
 
 	var event = chapter_data["events"][event_id]
 	event_text.text = event["text"]
