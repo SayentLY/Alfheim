@@ -154,16 +154,26 @@ func load_chapter_data() -> void:
 func get_music_state(event_id: String) -> String:
 	if event_id in ["prologue_home", "prologue_forge"]:
 		return "home"
+	if event_id == "prologue_raid":
+		return "silence"
 	if event_id in [
-		"prologue_meadow",
-		"meadow_start", "meadow_path", "meadow_cross",
-		"crossroads",
-		"thief_encounter", "thief_silent", "thief_nosy",
-		"boy_encounter"
+		"prologue_meadow", "meadow_start", "meadow_path", "meadow_cross",
+		"crossroads", "thief_encounter", "thief_silent", "thief_nosy"
 	]:
 		return "forest"
-	return "silence"
-
+	if event_id in [
+		"robbery_start", "robbery_locked_door", "robbery_lock_opened",
+		"robbery_inside", "robbery_owner", "robbery_escape_door",
+		"robbery_escape_window", "robbery_escape", "mill_night_wakeup"
+	]:
+		return "night"
+	if event_id in [
+		"village_night_approach", "village_night_thieves",
+		"final_choice_robber", "final_choice_outsider",
+		"chapter_end_bandits", "chapter_end_village"
+	]:
+		return "danger"
+	return "village"
 
 func show_event(event_id: String) -> void:
 	if not chapter_data["events"].has(event_id):
