@@ -20,6 +20,8 @@ func _ready() -> void:
 	standby_player = AudioStreamPlayer.new()
 	add_child(active_player)
 	add_child(standby_player)
+	active_player.bus = "Music"
+	standby_player.bus = "Music"
 	active_player.volume_db = -80.0
 	standby_player.volume_db = -80.0
 
