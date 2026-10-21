@@ -20,6 +20,7 @@ var is_transitioning := false
 
 func _ready() -> void:
 	AudioManager.play_music("main_menu")
+	AmbienceManager.stop_all()
 	continue_button.disabled = not SaveSystem.has_save()
 	continue_button.pressed.connect(_on_continue_button_pressed)
 
