@@ -41,6 +41,11 @@ func _ready() -> void:
 	add_child(effect_player)
 	add_child(bell_player)
 
+	active_ambience_player.bus = "Ambience"
+	standby_ambience_player.bus = "Ambience"
+	effect_player.bus = "SFX"
+	bell_player.bus = "SFX"
+
 	active_ambience_player.volume_db = -80.0
 	standby_ambience_player.volume_db = -80.0
 
