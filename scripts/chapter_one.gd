@@ -1,5 +1,7 @@
 extends Control
 
+const AUDIO_SETTINGS_SCENE: PackedScene = preload("res://scenes/audio_settings_overlay.tscn")
+
 @onready var background = $Background
 @onready var background_transition = $BackgroundTransition
 @onready var scene_fade_overlay = $SceneFadeOverlay
@@ -80,9 +82,13 @@ const SCENE_FADE_IN_TIME := 0.45
 
 var is_transitioning := false
 var character_base_position := Vector2.ZERO
+var audio_settings_overlay: Control
 
 
 func _ready() -> void:
+	audio_settings_overlay = AUDIO_SETTINGS_SCENE.instantiate() as Control
+	add_child(audio_settings_overlay)
+
 	# Фиксируем исходную позицию портрета ДО первой загрузки события.
 	# Иначе первое show_event() успевало записать Vector2.ZERO и уводило всех NPC влево-вверх.
 	character_base_position = character_portrait.position
@@ -646,8 +652,10 @@ func animate_panel_close(panel: Control) -> void:
 
 
 func _on_menu_settings_button_pressed() -> void:
-	# Настройки добавим отдельным этапом вместе с аудио и финальным UI.
-	pass
+	if is_transitioning or not game_menu_panel.visible or audio_settings_overlay.visible:
+		return
+
+	audio_settings_overlay.call("open_settings")
 
 
 func _on_menu_exit_button_pressed() -> void:
