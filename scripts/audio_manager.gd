@@ -1,6 +1,7 @@
 extends Node
 
 const MUSIC_FADE_TIME := 0.8
+const MUSIC_VOLUME_DB := -2.0
 const HOME_TRACK: AudioStream = preload("res://assets/audio/music/home.mp3")
 const FOREST_TRACK: AudioStream = preload("res://assets/audio/music/forest.mp3")
 const VILLAGE_TRACK: AudioStream = preload("res://assets/audio/music/village.mp3")
@@ -62,7 +63,7 @@ func play_music(state: String) -> void:
 	transition_tween = create_tween().set_parallel(true)
 	transition_tween.tween_property(standby_player, "volume_db", -80.0, MUSIC_FADE_TIME)
 	if track != null:
-		transition_tween.tween_property(active_player, "volume_db", 0.0, MUSIC_FADE_TIME)
+		transition_tween.tween_property(active_player, "volume_db", MUSIC_VOLUME_DB, MUSIC_FADE_TIME)
 	await transition_tween.finished
 	if is_instance_valid(old_player) and old_player != active_player:
 		old_player.stop()
