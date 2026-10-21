@@ -183,6 +183,7 @@ func show_event(event_id: String) -> void:
 	current_event_id = event_id
 	GameState.current_event_id = event_id
 	AudioManager.play_music(get_music_state(event_id))
+	AmbienceManager.enter_event(event_id)
 
 	var event = chapter_data["events"][event_id]
 	event_text.text = event["text"]
@@ -279,6 +280,7 @@ func transition_to_event(event_id: String) -> void:
 	current_event_id = event_id
 	GameState.current_event_id = event_id
 	AudioManager.play_music(get_music_state(event_id))
+	AmbienceManager.enter_event(event_id)
 	var event = chapter_data["events"][event_id]
 	event_text.text = event["text"]
 	rebuild_choices(event["choices"])
