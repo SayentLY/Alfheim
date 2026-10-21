@@ -96,9 +96,9 @@ vertical_alignment = 1
 
 [node name="MusicLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 210.0
+offset_left = 255.0
 offset_top = 305.0
-offset_right = 770.0
+offset_right = 815.0
 offset_bottom = 353.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 26
@@ -133,9 +133,9 @@ vertical_alignment = 1
 
 [node name="AmbienceLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 210.0
+offset_left = 255.0
 offset_top = 435.0
-offset_right = 770.0
+offset_right = 815.0
 offset_bottom = 483.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 26
@@ -170,9 +170,9 @@ vertical_alignment = 1
 
 [node name="SFXLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 210.0
+offset_left = 255.0
 offset_top = 565.0
-offset_right = 770.0
+offset_right = 815.0
 offset_bottom = 613.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 26
