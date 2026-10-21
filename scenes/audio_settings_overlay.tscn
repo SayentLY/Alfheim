@@ -107,10 +107,10 @@ vertical_alignment = 1
 
 [node name="MusicSlider" type="HSlider" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 332.0
-offset_right = 735.0
-offset_bottom = 396.0
+offset_left = 205.0
+offset_top = 342.0
+offset_right = 695.0
+offset_bottom = 406.0
 theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill")
@@ -121,10 +121,10 @@ scrollable = false
 
 [node name="MusicValue" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 755.0
-offset_top = 337.0
-offset_right = 845.0
-offset_bottom = 393.0
+offset_left = 715.0
+offset_top = 347.0
+offset_right = 805.0
+offset_bottom = 403.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 30
 text = "65%"
@@ -144,10 +144,10 @@ vertical_alignment = 1
 
 [node name="AmbienceSlider" type="HSlider" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 462.0
-offset_right = 735.0
-offset_bottom = 526.0
+offset_left = 205.0
+offset_top = 472.0
+offset_right = 695.0
+offset_bottom = 536.0
 theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill")
@@ -158,10 +158,10 @@ scrollable = false
 
 [node name="AmbienceValue" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 755.0
-offset_top = 467.0
-offset_right = 845.0
-offset_bottom = 523.0
+offset_left = 715.0
+offset_top = 477.0
+offset_right = 805.0
+offset_bottom = 533.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 30
 text = "100%"
@@ -181,10 +181,10 @@ vertical_alignment = 1
 
 [node name="SFXSlider" type="HSlider" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 592.0
-offset_right = 735.0
-offset_bottom = 656.0
+offset_left = 205.0
+offset_top = 602.0
+offset_right = 695.0
+offset_bottom = 666.0
 theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill")
@@ -195,10 +195,10 @@ scrollable = false
 
 [node name="SFXValue" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 755.0
-offset_top = 597.0
-offset_right = 845.0
-offset_bottom = 653.0
+offset_left = 715.0
+offset_top = 607.0
+offset_right = 805.0
+offset_bottom = 663.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 30
 text = "100%"
