@@ -14,13 +14,22 @@ const MENU_FADE_OUT_TIME := 0.25
 const SCREEN_FADE_OUT_TIME := 0.25
 const LOADING_FADE_IN_TIME := 0.35
 const GAME_SCENE_PATH := "res://scenes/chapter_one.tscn"
+const AUDIO_SETTINGS_SCENE: PackedScene = preload("res://scenes/audio_settings_overlay.tscn")
 
 var is_transitioning := false
+var audio_settings_overlay: Control
 
 
 func _ready() -> void:
 	AudioManager.play_music("main_menu")
 	AmbienceManager.stop_all()
+
+	audio_settings_overlay = AUDIO_SETTINGS_SCENE.instantiate() as Control
+	add_child(audio_settings_overlay)
+	audio_settings_overlay.connect("closed", _on_audio_settings_closed)
+
+	settings_button.pressed.connect(_on_settings_button_pressed)
+	exit_button.pressed.connect(_on_exit_button_pressed)
 	continue_button.disabled = not SaveSystem.has_save()
 	continue_button.pressed.connect(_on_continue_button_pressed)
 
@@ -132,7 +141,16 @@ func _on_continue_button_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
-	pass
+	if is_transitioning or audio_settings_overlay.visible:
+		return
+
+	set_menu_input_enabled(false)
+	audio_settings_overlay.call("open_settings")
+
+
+func _on_audio_settings_closed() -> void:
+	if not is_transitioning:
+		set_menu_input_enabled(true)
 
 
 func _on_exit_button_pressed() -> void:
