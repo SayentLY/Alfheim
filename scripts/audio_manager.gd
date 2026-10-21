@@ -1,7 +1,8 @@
 extends Node
 
 const MUSIC_FADE_TIME := 0.8
-const MUSIC_VOLUME_DB := -2.0
+# Main music gain is controlled by the Music bus (SoundSettings).
+const MUSIC_VOLUME_DB := 0.0
 const HOME_TRACK: AudioStream = preload("res://assets/audio/music/home.mp3")
 const FOREST_TRACK: AudioStream = preload("res://assets/audio/music/forest.mp3")
 const VILLAGE_TRACK: AudioStream = preload("res://assets/audio/music/village.mp3")
