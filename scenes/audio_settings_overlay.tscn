@@ -11,8 +11,8 @@ corner_radius_top_left = 9
 corner_radius_top_right = 9
 corner_radius_bottom_right = 9
 corner_radius_bottom_left = 9
-content_margin_top = 12.0
-content_margin_bottom = 12.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slider_fill"]
 bg_color = Color(0.68, 0.49, 0.24, 1)
@@ -20,8 +20,8 @@ corner_radius_top_left = 9
 corner_radius_top_right = 9
 corner_radius_bottom_right = 9
 corner_radius_bottom_left = 9
-content_margin_top = 12.0
-content_margin_bottom = 12.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn_normal"]
 texture = ExtResource("3_normal")
@@ -97,9 +97,9 @@ vertical_alignment = 1
 [node name="MusicLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 307.0
+offset_top = 285.0
 offset_right = 770.0
-offset_bottom = 355.0
+offset_bottom = 333.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 32
 text = "Музыка"
@@ -107,10 +107,10 @@ vertical_alignment = 1
 
 [node name="MusicSlider" type="HSlider" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 158.0
-offset_top = 362.0
-offset_right = 773.0
-offset_bottom = 426.0
+offset_left = 185.0
+offset_top = 332.0
+offset_right = 735.0
+offset_bottom = 396.0
 theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill")
@@ -121,10 +121,10 @@ scrollable = false
 
 [node name="MusicValue" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 795.0
-offset_top = 367.0
-offset_right = 878.0
-offset_bottom = 423.0
+offset_left = 755.0
+offset_top = 337.0
+offset_right = 845.0
+offset_bottom = 393.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 30
 text = "65%"
@@ -134,9 +134,9 @@ vertical_alignment = 1
 [node name="AmbienceLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 458.0
+offset_top = 415.0
 offset_right = 770.0
-offset_bottom = 506.0
+offset_bottom = 463.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 32
 text = "Атмосфера"
@@ -144,10 +144,10 @@ vertical_alignment = 1
 
 [node name="AmbienceSlider" type="HSlider" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 158.0
-offset_top = 513.0
-offset_right = 773.0
-offset_bottom = 577.0
+offset_left = 185.0
+offset_top = 462.0
+offset_right = 735.0
+offset_bottom = 526.0
 theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill")
@@ -158,10 +158,10 @@ scrollable = false
 
 [node name="AmbienceValue" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 795.0
-offset_top = 518.0
-offset_right = 884.0
-offset_bottom = 574.0
+offset_left = 755.0
+offset_top = 467.0
+offset_right = 845.0
+offset_bottom = 523.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 30
 text = "100%"
@@ -171,9 +171,9 @@ vertical_alignment = 1
 [node name="SFXLabel" type="Label" parent="SettingsPanel"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 610.0
+offset_top = 545.0
 offset_right = 770.0
-offset_bottom = 658.0
+offset_bottom = 593.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 32
 text = "Звуковые эффекты"
@@ -181,10 +181,10 @@ vertical_alignment = 1
 
 [node name="SFXSlider" type="HSlider" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 158.0
-offset_top = 665.0
-offset_right = 773.0
-offset_bottom = 729.0
+offset_left = 185.0
+offset_top = 592.0
+offset_right = 735.0
+offset_bottom = 656.0
 theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill")
@@ -195,10 +195,10 @@ scrollable = false
 
 [node name="SFXValue" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 795.0
-offset_top = 670.0
-offset_right = 884.0
-offset_bottom = 726.0
+offset_left = 755.0
+offset_top = 597.0
+offset_right = 845.0
+offset_bottom = 653.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 30
 text = "100%"
@@ -208,9 +208,9 @@ vertical_alignment = 1
 [node name="SaveHint" type="Label" parent="SettingsPanel"]
 layout_mode = 0
 offset_left = 140.0
-offset_top = 760.0
+offset_top = 695.0
 offset_right = 844.0
-offset_bottom = 807.0
+offset_bottom = 742.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.85, 0.81, 0.75, 1)
 theme_override_font_sizes/font_size = 24
@@ -221,9 +221,9 @@ vertical_alignment = 1
 [node name="CloseButton" type="Button" parent="SettingsPanel"]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 840.0
+offset_top = 770.0
 offset_right = 744.0
-offset_bottom = 996.0
+offset_bottom = 926.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_btn_normal")
 theme_override_styles/hover = SubResource("StyleBoxTexture_btn_normal")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_pressed")
